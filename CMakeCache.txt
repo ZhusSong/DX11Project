@@ -14,6 +14,130 @@
 # EXTERNAL cache entries
 ########################
 
+//Android JNI IOSystem support is active
+ASSIMP_ANDROID_JNIIOSYSTEM:BOOL=OFF
+
+//Path for library output files
+ASSIMP_ARCHIVE_OUTPUT_DIRECTORY:STRING=H:/DX11Project/assimp/lib
+
+//Enable AddressSanitizer.
+ASSIMP_ASAN:BOOL=OFF
+
+//Path the tool executables are installed to.
+ASSIMP_BIN_INSTALL_DIR:STRING=bin
+
+//default value of all ASSIMP_BUILD_XXX_EXPORTER values
+ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT:BOOL=ON
+
+//default value of all ASSIMP_BUILD_XXX_IMPORTER values
+ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT:BOOL=ON
+
+//describe the current architecture.
+ASSIMP_BUILD_ARCHITECTURE:STRING=
+
+//If the supplementary tools for Assimp are built in addition to
+// the library.
+ASSIMP_BUILD_ASSIMP_TOOLS:BOOL=ON
+
+//If the Assimp view tool is built. (requires DirectX)
+ASSIMP_BUILD_ASSIMP_VIEW:BOOL=OFF
+
+//describe the current compiler.
+ASSIMP_BUILD_COMPILER:STRING=
+
+//Build documentation using Doxygen.
+ASSIMP_BUILD_DOCS:BOOL=OFF
+
+//If the Draco libraries are to be built. Primarily for glTF
+ASSIMP_BUILD_DRACO:BOOL=OFF
+
+//Build package as Mac OS X Framework bundle.
+ASSIMP_BUILD_FRAMEWORK:BOOL=OFF
+
+//Build the C4D importer, which relies on the non-free Cineware
+// SDK.
+ASSIMP_BUILD_NONFREE_C4D_IMPORTER:BOOL=OFF
+
+//If the official samples are built as well (needs Glut).
+ASSIMP_BUILD_SAMPLES:BOOL=OFF
+
+//If the test suite for Assimp is built in addition to the library.
+ASSIMP_BUILD_TESTS:BOOL=ON
+
+//Build your own zlib
+ASSIMP_BUILD_ZLIB:BOOL=OFF
+
+//Enable this to measure test coverage.
+ASSIMP_COVERALLS:BOOL=OFF
+
+//Set to ON to enable double precision processing
+ASSIMP_DOUBLE_PRECISION:BOOL=OFF
+
+//Enable all warnings.
+ASSIMP_ERROR_MAX:BOOL=OFF
+
+//adds the target headercheck which compiles every header file,
+// default disabled because it adds many targets
+ASSIMP_HEADERCHECK:BOOL=OFF
+
+//Enable Hunter package manager support
+ASSIMP_HUNTER_ENABLED:BOOL=OFF
+
+//Don't call git to get the hash.
+ASSIMP_IGNORE_GIT_HASH:BOOL=OFF
+
+//Path the header files are installed to.
+ASSIMP_INCLUDE_INSTALL_DIR:STRING=include
+
+//Inject debug postfix in .a/.so/.dll lib names
+ASSIMP_INJECT_DEBUG_POSTFIX:BOOL=ON
+
+//Disable this if you want to use assimp as a submodule.
+ASSIMP_INSTALL:BOOL=ON
+
+//Install MSVC debug files.
+ASSIMP_INSTALL_PDB:BOOL=ON
+
+//Path for library output files
+ASSIMP_LIBRARY_OUTPUT_DIRECTORY:STRING=H:/DX11Project/assimp/bin
+
+//Suffix to append to library names
+ASSIMP_LIBRARY_SUFFIX:STRING=
+
+//Path the built library files are installed to.
+ASSIMP_LIB_INSTALL_DIR:STRING=lib
+
+//Disable Assimp's export functionality.
+ASSIMP_NO_EXPORT:BOOL=OFF
+
+//Set to ON to generate CPack configuration files and packaging
+// targets
+ASSIMP_OPT_BUILD_PACKAGES:BOOL=OFF
+
+//the package-specific version used for uploading the sources
+ASSIMP_PACKAGE_VERSION:STRING=0
+
+//Suppress rapidjson warning on MSVC (NOTE: breaks android build)
+ASSIMP_RAPIDJSON_NO_MEMBER_ITERATOR:BOOL=ON
+
+//Path for runtime output files
+ASSIMP_RUNTIME_OUTPUT_DIRECTORY:STRING=H:/DX11Project/assimp/bin
+
+//Enable Undefined Behavior sanitizer.
+ASSIMP_UBSAN:BOOL=OFF
+
+//Value Computed by CMake
+Assimp_BINARY_DIR:STATIC=H:/DX11Project/assimp
+
+//Value Computed by CMake
+Assimp_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+Assimp_SOURCE_DIR:STATIC=H:/DX11Project/assimp
+
+//Build package with shared libraries.
+BUILD_SHARED_LIBS:BOOL=ON
+
 //Path to a program.
 CMAKE_AR:FILEPATH=E:/VS2022 IDE/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/lib.exe
 
@@ -57,6 +181,9 @@ CMAKE_C_FLAGS_RELWITHDEBINFO:STRING=/Zi /O2 /Ob1 /DNDEBUG
 
 //Libraries linked by default with all C applications.
 CMAKE_C_STANDARD_LIBRARIES:STRING=kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+
+//Debug Postfix for lib, samples and tools
+CMAKE_DEBUG_POSTFIX:STRING=d
 
 //Flags used by the linker during all build types.
 CMAKE_EXE_LINKER_FLAGS:STRING=/machine:x64
@@ -114,6 +241,21 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=newDX11Project
 
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION:STATIC=5.2.0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MAJOR:STATIC=5
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MINOR:STATIC=2
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_PATCH:STATIC=0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_TWEAK:STATIC=
+
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=rc
 
@@ -154,10 +296,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //If set, runtime paths are not added when installing shared libraries,
 // but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
+CMAKE_SKIP_INSTALL_RPATH:BOOL=OFF
 
 //If set, runtime paths are not added when using shared libraries.
-CMAKE_SKIP_RPATH:BOOL=NO
+CMAKE_SKIP_RPATH:BOOL=OFF
 
 //Flags used by the linker during the creation of static libraries
 // during all build types.
@@ -183,7 +325,31 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
-CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+CMAKE_VERBOSE_MAKEFILE:BOOL=OFF
+
+//the suffix for the assimp windows library
+LIBRARY_SUFFIX:STRING=-vc143-mt
+
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=PKG_CONFIG_EXECUTABLE-NOTFOUND
+
+//Path to a library.
+RT_LIBRARY:FILEPATH=RT_LIBRARY-NOTFOUND
+
+//Path to a file.
+ZLIB_INCLUDE_DIR:PATH=ZLIB_INCLUDE_DIR-NOTFOUND
+
+//Path to a library.
+ZLIB_LIBRARY_DBG:FILEPATH=ZLIB_LIBRARY_DBG-NOTFOUND
+
+//Path to a library.
+ZLIB_LIBRARY_REL:FILEPATH=ZLIB_LIBRARY_REL-NOTFOUND
+
+//Dependencies for the target
+assimp_LIB_DEPENDS:STATIC=general;zlibstatic;
 
 //Value Computed by CMake
 newDX11Project_BINARY_DIR:STATIC=H:/DX11Project
@@ -194,11 +360,28 @@ newDX11Project_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 newDX11Project_SOURCE_DIR:STATIC=H:/DX11Project
 
+//Value Computed by CMake
+zlib_BINARY_DIR:STATIC=H:/DX11Project/assimp/contrib/zlib
+
+//Value Computed by CMake
+zlib_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+zlib_SOURCE_DIR:STATIC=H:/DX11Project/assimp/contrib/zlib
+
 
 ########################
 # INTERNAL cache entries
 ########################
 
+//Enable building amd64 assembly implementation
+AMD64:INTERNAL=FALSE
+//Enable building i686 assembly implementation
+ASM686:INTERNAL=FALSE
+//ADVANCED property for variable: ASSIMP_BUILD_ARCHITECTURE
+ASSIMP_BUILD_ARCHITECTURE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ASSIMP_BUILD_COMPILER
+ASSIMP_BUILD_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created
@@ -279,7 +462,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //noop for ranlib
@@ -325,4 +508,32 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Have function fseeko
+HAVE_FSEEKO:INTERNAL=
+//Result of TRY_COMPILE
+HAVE_OFF64_T:INTERNAL=FALSE
+//Have include stddef.h
+HAVE_STDDEF_H:INTERNAL=1
+//Have include stdint.h
+HAVE_STDINT_H:INTERNAL=1
+//Have include sys/types.h
+HAVE_SYS_TYPES_H:INTERNAL=1
+//CHECK_TYPE_SIZE: off64_t unknown
+OFF64_T:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: RT_LIBRARY
+RT_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_INCLUDE_DIR
+ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_LIBRARY_DBG
+ZLIB_LIBRARY_DBG-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: ZLIB_LIBRARY_REL
+ZLIB_LIBRARY_REL-ADVANCED:INTERNAL=1
+//x
+ZLIB_PREFIX_PATH_INT_CHECK:INTERNAL=
+//Have include unistd.h
+Z_HAVE_UNISTD_H:INTERNAL=
 

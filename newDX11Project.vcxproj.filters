@@ -2,32 +2,32 @@
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="H:\DX11Project\GameApp\main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameApp</Filter>
     </ClCompile>
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>DX11API</Filter>
     </ClCompile>
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>DX11API</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.h">
-      <Filter>Header Files</Filter>
+      <Filter>DX11API</Filter>
     </ClInclude>
     <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.h">
-      <Filter>Header Files</Filter>
+      <Filter>DX11API</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="H:\DX11Project\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{3C7AC816-482C-30EB-8DA5-1032BDF3EC17}</UniqueIdentifier>
+    <Filter Include="DX11API">
+      <UniqueIdentifier>{015A4D00-C2E3-36C3-B3F7-70524D60E4EC}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{6AE5C964-7284-3627-A2D9-46DCC5D0F1F6}</UniqueIdentifier>
+    <Filter Include="GameApp">
+      <UniqueIdentifier>{9F4F3FAC-240D-38BE-BBB1-50C4C3A2F03D}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

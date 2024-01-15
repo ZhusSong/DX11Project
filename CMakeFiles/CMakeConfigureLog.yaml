@@ -225,3 +225,344 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "E:/CMakeGui/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "assimp/contrib/zlib/CMakeLists.txt:35 (check_include_file)"
+    checks:
+      - "Looking for sys/types.h"
+    directories:
+      source: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-9aojq1"
+      binary: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-9aojq1"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/DX11Project/assimp/cmake-modules"
+    buildResult:
+      variable: "HAVE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-9aojq1'
+        
+        Run Build Command(s): "E:/VS2022 IDE/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_205a8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 2024/01/15 15:01:06.
+        
+        Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-9aojq1\\cmTC_205a8.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_205a8.dir\\Debug\\".
+          Creating directory "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-9aojq1\\Debug\\".
+          Creating directory "cmTC_205a8.dir\\Debug\\cmTC_205a8.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_205a8.dir\\Debug\\cmTC_205a8.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_205a8.dir\\Debug\\cmTC_205a8.tlog\\unsuccessfulbuild".
+        ClCompile:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_205a8.dir\\Debug\\\\" /Fd"cmTC_205a8.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-9aojq1\\CheckIncludeFile.c"
+          用于 x64 的 Microsoft (R) C/C++ ?化??器 19.37.32822 版
+          CheckIncludeFile.c
+          版?所有(C) Microsoft Corporation。保留所有?利。
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_205a8.dir\\Debug\\\\" /Fd"cmTC_205a8.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-9aojq1\\CheckIncludeFile.c"
+        Link:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-9aojq1\\Debug\\cmTC_205a8.exe" /INCREMENTAL /ILK:"cmTC_205a8.dir\\Debug\\cmTC_205a8.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-9aojq1/Debug/cmTC_205a8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-9aojq1/Debug/cmTC_205a8.lib" /MACHINE:X64  /machine:x64 cmTC_205a8.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_205a8.vcxproj -> H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-9aojq1\\Debug\\cmTC_205a8.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_205a8.dir\\Debug\\cmTC_205a8.tlog\\unsuccessfulbuild".
+          Touching "cmTC_205a8.dir\\Debug\\cmTC_205a8.tlog\\cmTC_205a8.lastbuildstate".
+        Done Building Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-9aojq1\\cmTC_205a8.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.43
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "E:/CMakeGui/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "assimp/contrib/zlib/CMakeLists.txt:36 (check_include_file)"
+    checks:
+      - "Looking for stdint.h"
+    directories:
+      source: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-aghu1a"
+      binary: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-aghu1a"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/DX11Project/assimp/cmake-modules"
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-aghu1a'
+        
+        Run Build Command(s): "E:/VS2022 IDE/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_acea3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 2024/01/15 15:01:07.
+        
+        Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-aghu1a\\cmTC_acea3.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_acea3.dir\\Debug\\".
+          Creating directory "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-aghu1a\\Debug\\".
+          Creating directory "cmTC_acea3.dir\\Debug\\cmTC_acea3.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_acea3.dir\\Debug\\cmTC_acea3.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_acea3.dir\\Debug\\cmTC_acea3.tlog\\unsuccessfulbuild".
+        ClCompile:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_acea3.dir\\Debug\\\\" /Fd"cmTC_acea3.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-aghu1a\\CheckIncludeFile.c"
+          用于 x64 的 Microsoft (R) C/C++ ?化??器 19.37.32822 版
+          CheckIncludeFile.c
+          版?所有(C) Microsoft Corporation。保留所有?利。
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_acea3.dir\\Debug\\\\" /Fd"cmTC_acea3.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-aghu1a\\CheckIncludeFile.c"
+        Link:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-aghu1a\\Debug\\cmTC_acea3.exe" /INCREMENTAL /ILK:"cmTC_acea3.dir\\Debug\\cmTC_acea3.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-aghu1a/Debug/cmTC_acea3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-aghu1a/Debug/cmTC_acea3.lib" /MACHINE:X64  /machine:x64 cmTC_acea3.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_acea3.vcxproj -> H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-aghu1a\\Debug\\cmTC_acea3.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_acea3.dir\\Debug\\cmTC_acea3.tlog\\unsuccessfulbuild".
+          Touching "cmTC_acea3.dir\\Debug\\cmTC_acea3.tlog\\cmTC_acea3.lastbuildstate".
+        Done Building Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-aghu1a\\cmTC_acea3.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.53
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "E:/CMakeGui/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "assimp/contrib/zlib/CMakeLists.txt:37 (check_include_file)"
+    checks:
+      - "Looking for stddef.h"
+    directories:
+      source: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-wanzv6"
+      binary: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-wanzv6"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/DX11Project/assimp/cmake-modules"
+    buildResult:
+      variable: "HAVE_STDDEF_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-wanzv6'
+        
+        Run Build Command(s): "E:/VS2022 IDE/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_62d90.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 2024/01/15 15:01:08.
+        
+        Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-wanzv6\\cmTC_62d90.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_62d90.dir\\Debug\\".
+          Creating directory "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-wanzv6\\Debug\\".
+          Creating directory "cmTC_62d90.dir\\Debug\\cmTC_62d90.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_62d90.dir\\Debug\\cmTC_62d90.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_62d90.dir\\Debug\\cmTC_62d90.tlog\\unsuccessfulbuild".
+        ClCompile:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_62d90.dir\\Debug\\\\" /Fd"cmTC_62d90.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-wanzv6\\CheckIncludeFile.c"
+          用于 x64 的 Microsoft (R) C/C++ ?化??器 19.37.32822 版
+          CheckIncludeFile.c
+          版?所有(C) Microsoft Corporation。保留所有?利。
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_62d90.dir\\Debug\\\\" /Fd"cmTC_62d90.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-wanzv6\\CheckIncludeFile.c"
+        Link:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-wanzv6\\Debug\\cmTC_62d90.exe" /INCREMENTAL /ILK:"cmTC_62d90.dir\\Debug\\cmTC_62d90.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-wanzv6/Debug/cmTC_62d90.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-wanzv6/Debug/cmTC_62d90.lib" /MACHINE:X64  /machine:x64 cmTC_62d90.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_62d90.vcxproj -> H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-wanzv6\\Debug\\cmTC_62d90.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_62d90.dir\\Debug\\cmTC_62d90.tlog\\unsuccessfulbuild".
+          Touching "cmTC_62d90.dir\\Debug\\cmTC_62d90.tlog\\cmTC_62d90.lastbuildstate".
+        Done Building Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-wanzv6\\cmTC_62d90.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.55
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "E:/CMakeGui/share/cmake-3.28/Modules/CheckTypeSize.cmake:146 (try_compile)"
+      - "E:/CMakeGui/share/cmake-3.28/Modules/CheckTypeSize.cmake:271 (__check_type_size_impl)"
+      - "assimp/contrib/zlib/CMakeLists.txt:55 (check_type_size)"
+    checks:
+      - "Check size of off64_t"
+    directories:
+      source: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-3rt9a3"
+      binary: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-3rt9a3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/DX11Project/assimp/cmake-modules"
+    buildResult:
+      variable: "HAVE_OFF64_T"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-3rt9a3'
+        
+        Run Build Command(s): "E:/VS2022 IDE/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_5eef7.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 2024/01/15 15:01:09.
+        
+        Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_5eef7.dir\\Debug\\".
+          Creating directory "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\Debug\\".
+          Creating directory "cmTC_5eef7.dir\\Debug\\cmTC_5eef7.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_5eef7.dir\\Debug\\cmTC_5eef7.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_5eef7.dir\\Debug\\cmTC_5eef7.tlog\\unsuccessfulbuild".
+        ClCompile:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _LARGEFILE64_SOURCE=1 /D HAVE_SYS_TYPES_H /D HAVE_STDINT_H /D HAVE_STDDEF_H /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5eef7.dir\\Debug\\\\" /Fd"cmTC_5eef7.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c"
+          用于 x64 的 Microsoft (R) C/C++ ?化??器 19.37.32822 版
+          OFF64_T.c
+          版?所有(C) Microsoft Corporation。保留所有?利。
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _LARGEFILE64_SOURCE=1 /D HAVE_SYS_TYPES_H /D HAVE_STDINT_H /D HAVE_STDDEF_H /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5eef7.dir\\Debug\\\\" /Fd"cmTC_5eef7.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c"
+        H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(29,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+        H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(30,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+        H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(31,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+        H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(32,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+        H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(33,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+        Done Building Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(29,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+          H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(30,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+          H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(31,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+          H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(32,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+          H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\OFF64_T.c(33,12): error C2065: “off64_t”: 未声明的??符 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-3rt9a3\\cmTC_5eef7.vcxproj]
+        
+            0 Warning(s)
+            5 Error(s)
+        
+        Time Elapsed 00:00:00.29
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "E:/CMakeGui/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "assimp/contrib/zlib/CMakeLists.txt:64 (check_function_exists)"
+    checks:
+      - "Looking for fseeko"
+    directories:
+      source: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-pblupu"
+      binary: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-pblupu"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/DX11Project/assimp/cmake-modules"
+    buildResult:
+      variable: "HAVE_FSEEKO"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-pblupu'
+        
+        Run Build Command(s): "E:/VS2022 IDE/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_245e6.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 2024/01/15 15:01:09.
+        
+        Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\cmTC_245e6.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_245e6.dir\\Debug\\".
+          Creating directory "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\Debug\\".
+          Creating directory "cmTC_245e6.dir\\Debug\\cmTC_245e6.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_245e6.dir\\Debug\\cmTC_245e6.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_245e6.dir\\Debug\\cmTC_245e6.tlog\\unsuccessfulbuild".
+        ClCompile:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=fseeko /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_245e6.dir\\Debug\\\\" /Fd"cmTC_245e6.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\CheckFunctionExists.c"
+          用于 x64 的 Microsoft (R) C/C++ ?化??器 19.37.32822 版
+          CheckFunctionExists.c
+          版?所有(C) Microsoft Corporation。保留所有?利。
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=fseeko /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_245e6.dir\\Debug\\\\" /Fd"cmTC_245e6.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\CheckFunctionExists.c"
+        Link:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\Debug\\cmTC_245e6.exe" /INCREMENTAL /ILK:"cmTC_245e6.dir\\Debug\\cmTC_245e6.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-pblupu/Debug/cmTC_245e6.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-pblupu/Debug/cmTC_245e6.lib" /MACHINE:X64  /machine:x64 cmTC_245e6.dir\\Debug\\CheckFunctionExists.obj
+        CheckFunctionExists.obj : error LNK2019: 无法解析的外部符号 fseeko，函数 main 中引用了?符号 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\cmTC_245e6.vcxproj]
+        H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\Debug\\cmTC_245e6.exe : fatal error LNK1120: 1 个无法解析的外部命令 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\cmTC_245e6.vcxproj]
+        Done Building Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\cmTC_245e6.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\cmTC_245e6.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          CheckFunctionExists.obj : error LNK2019: 无法解析的外部符号 fseeko，函数 main 中引用了?符号 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\cmTC_245e6.vcxproj]
+          H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\Debug\\cmTC_245e6.exe : fatal error LNK1120: 1 个无法解析的外部命令 [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-pblupu\\cmTC_245e6.vcxproj]
+        
+            0 Warning(s)
+            2 Error(s)
+        
+        Time Elapsed 00:00:00.48
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "E:/CMakeGui/share/cmake-3.28/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "assimp/contrib/zlib/CMakeLists.txt:72 (check_include_file)"
+    checks:
+      - "Looking for unistd.h"
+    directories:
+      source: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-o6n3n5"
+      binary: "H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-o6n3n5"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/DX11Project/assimp/cmake-modules"
+    buildResult:
+      variable: "Z_HAVE_UNISTD_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/DX11Project/CMakeFiles/CMakeScratch/TryCompile-o6n3n5'
+        
+        Run Build Command(s): "E:/VS2022 IDE/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a9d38.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.7.2+d6990bcfa for .NET Framework
+        Build started 2024/01/15 15:01:10.
+        
+        Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\cmTC_a9d38.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_a9d38.dir\\Debug\\".
+          Creating directory "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\Debug\\".
+          Creating directory "cmTC_a9d38.dir\\Debug\\cmTC_a9d38.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_a9d38.dir\\Debug\\cmTC_a9d38.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_a9d38.dir\\Debug\\cmTC_a9d38.tlog\\unsuccessfulbuild".
+        ClCompile:
+          E:\\VS2022 IDE\\VC\\Tools\\MSVC\\14.37.32822\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a9d38.dir\\Debug\\\\" /Fd"cmTC_a9d38.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\CheckIncludeFile.c"
+          用于 x64 的 Microsoft (R) C/C++ ?化??器 19.37.32822 版
+          版?所有(C) Microsoft Corporation。保留所有?利。
+          CheckIncludeFile.c
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a9d38.dir\\Debug\\\\" /Fd"cmTC_a9d38.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\CheckIncludeFile.c"
+        H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\CheckIncludeFile.c(1,10): fatal  error C1083: 无法打?包括文件: “unistd.h”: No such file or directory [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\cmTC_a9d38.vcxproj]
+        Done Building Project "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\cmTC_a9d38.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\cmTC_a9d38.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\CheckIncludeFile.c(1,10): fatal  error C1083: 无法打?包括文件: “unistd.h”: No such file or directory [H:\\DX11Project\\CMakeFiles\\CMakeScratch\\TryCompile-o6n3n5\\cmTC_a9d38.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.29
+        
+      exitCode: 1
+...

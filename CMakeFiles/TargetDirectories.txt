@@ -1,3 +1,14 @@
 H:/DX11Project/CMakeFiles/newDX11Project.dir
+H:/DX11Project/CMakeFiles/INSTALL.dir
 H:/DX11Project/CMakeFiles/ALL_BUILD.dir
 H:/DX11Project/CMakeFiles/ZERO_CHECK.dir
+H:/DX11Project/ImGui/CMakeFiles/ImGui.dir
+H:/DX11Project/ImGui/CMakeFiles/INSTALL.dir
+H:/DX11Project/assimp/CMakeFiles/UpdateAssimpLibsDebugSymbolsAndDLLs.dir
+H:/DX11Project/assimp/CMakeFiles/INSTALL.dir
+H:/DX11Project/assimp/CMakeFiles/ALL_BUILD.dir
+H:/DX11Project/assimp/contrib/zlib/CMakeFiles/zlibstatic.dir
+H:/DX11Project/assimp/contrib/zlib/CMakeFiles/INSTALL.dir
+H:/DX11Project/assimp/contrib/zlib/CMakeFiles/ALL_BUILD.dir
+H:/DX11Project/assimp/code/CMakeFiles/assimp.dir
+H:/DX11Project/assimp/code/CMakeFiles/INSTALL.dir

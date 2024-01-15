@@ -1,0 +1,9 @@
+libdir=C:/Program Files (x86)/newDX11Project/lib
+includedir=C:/Program Files (x86)/newDX11Project/include
+
+Name: newDX11Project
+Description: Import various well-known 3D model formats in an uniform manner.
+Version: 5.2.0
+Libs: -L${libdir} -lassimp
+Libs.private:  
+Cflags: -I${includedir}
