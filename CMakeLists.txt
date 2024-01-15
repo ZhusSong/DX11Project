@@ -39,19 +39,26 @@ file(GLOB HLSL_FILES ${HLSL_DIR}/*.hlsl)
 set (SOURCES
 GameApp/main.cpp
  )
-
-set (ProjectAPI
-DX11API/TextureLoader/DDSTextureLoader.cpp
+ 
+ set (DX11API
+DX11API/WinAPISetting.h
+DX11API/DXGameTimer.cpp
+DX11API/DXGameTimer.h
+ )
+ 
+ set (TextureLoader
+ DX11API/TextureLoader/DDSTextureLoader.cpp
 DX11API/TextureLoader/DDSTextureLoader.h
 DX11API/TextureLoader/WICTextureLoader.cpp
 DX11API/TextureLoader/WICTextureLoader.h
  )
  
  source_group(GameApp FILES ${SOURCES})
- source_group(DX11API FILES ${ProjectAPI})
+ source_group(DX11API FILES ${DX11API})
+ source_group(DX11API\\TextureLoader FILES ${TextureLoader})
 
 
-add_executable(newDX11Project ${SOURCES} ${ProjectAPI})
+add_executable(newDX11Project ${SOURCES} ${DX11API} ${TextureLoader})
 # 添加链接库
 target_link_libraries(${TARGET_NAME} d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib)
 

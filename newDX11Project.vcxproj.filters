@@ -4,19 +4,28 @@
     <ClCompile Include="H:\DX11Project\GameApp\main.cpp">
       <Filter>GameApp</Filter>
     </ClCompile>
-    <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.cpp">
+    <ClCompile Include="H:\DX11Project\DX11API\DXGameTimer.cpp">
       <Filter>DX11API</Filter>
     </ClCompile>
+    <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.cpp">
+      <Filter>DX11API\TextureLoader</Filter>
+    </ClCompile>
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.cpp">
-      <Filter>DX11API</Filter>
+      <Filter>DX11API\TextureLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.h">
+    <ClInclude Include="H:\DX11Project\DX11API\WinAPISetting.h">
       <Filter>DX11API</Filter>
     </ClInclude>
-    <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.h">
+    <ClInclude Include="H:\DX11Project\DX11API\DXGameTimer.h">
       <Filter>DX11API</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.h">
+      <Filter>DX11API\TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.h">
+      <Filter>DX11API\TextureLoader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -25,6 +34,9 @@
   <ItemGroup>
     <Filter Include="DX11API">
       <UniqueIdentifier>{015A4D00-C2E3-36C3-B3F7-70524D60E4EC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX11API\TextureLoader">
+      <UniqueIdentifier>{1C0AD1BE-377C-371A-B248-DA2E7A07697C}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameApp">
       <UniqueIdentifier>{9F4F3FAC-240D-38BE-BBB1-50C4C3A2F03D}</UniqueIdentifier>

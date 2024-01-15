@@ -318,6 +318,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="H:\DX11Project\GameApp\main.cpp" />
+    <ClInclude Include="H:\DX11Project\DX11API\WinAPISetting.h" />
+    <ClCompile Include="H:\DX11Project\DX11API\DXGameTimer.cpp" />
+    <ClInclude Include="H:\DX11Project\DX11API\DXGameTimer.h" />
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.cpp" />
     <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.h" />
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.cpp" />
