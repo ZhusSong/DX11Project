@@ -69,7 +69,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -79,7 +79,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -89,7 +89,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -99,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>

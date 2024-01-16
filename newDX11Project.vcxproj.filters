@@ -4,7 +4,16 @@
     <ClCompile Include="H:\DX11Project\GameApp\main.cpp">
       <Filter>GameApp</Filter>
     </ClCompile>
+    <ClCompile Include="H:\DX11Project\GameApp\DX11App.cpp">
+      <Filter>GameApp</Filter>
+    </ClCompile>
     <ClCompile Include="H:\DX11Project\DX11API\DXGameTimer.cpp">
+      <Filter>DX11API</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\DX11Project\DX11API\DX11Debug.cpp">
+      <Filter>DX11API</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\DX11Project\DX11API\DX11Utility.cpp">
       <Filter>DX11API</Filter>
     </ClCompile>
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.cpp">
@@ -13,12 +22,27 @@
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.cpp">
       <Filter>DX11API\TextureLoader</Filter>
     </ClCompile>
+    <ClCompile Include="H:\DX11Project\DX11API\Keyboard.cpp">
+      <Filter>DX11API\InputAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\DX11Project\DX11API\Mouse.cpp">
+      <Filter>DX11API\InputAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="H:\DX11Project\GameApp\DX11App.h">
+      <Filter>GameApp</Filter>
+    </ClInclude>
     <ClInclude Include="H:\DX11Project\DX11API\WinAPISetting.h">
       <Filter>DX11API</Filter>
     </ClInclude>
     <ClInclude Include="H:\DX11Project\DX11API\DXGameTimer.h">
+      <Filter>DX11API</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\DX11Project\DX11API\DX11Debug.h">
+      <Filter>DX11API</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\DX11Project\DX11API\DX11Utility.h">
       <Filter>DX11API</Filter>
     </ClInclude>
     <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.h">
@@ -27,6 +51,12 @@
     <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.h">
       <Filter>DX11API\TextureLoader</Filter>
     </ClInclude>
+    <ClInclude Include="H:\DX11Project\DX11API\Keyboard.h">
+      <Filter>DX11API\InputAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="H:\DX11Project\DX11API\Mouse.h">
+      <Filter>DX11API\InputAPI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="H:\DX11Project\CMakeLists.txt" />
@@ -34,6 +64,9 @@
   <ItemGroup>
     <Filter Include="DX11API">
       <UniqueIdentifier>{015A4D00-C2E3-36C3-B3F7-70524D60E4EC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX11API\InputAPI">
+      <UniqueIdentifier>{C360EE26-2CB7-373D-A312-A718EA2BB563}</UniqueIdentifier>
     </Filter>
     <Filter Include="DX11API\TextureLoader">
       <UniqueIdentifier>{1C0AD1BE-377C-371A-B248-DA2E7A07697C}</UniqueIdentifier>

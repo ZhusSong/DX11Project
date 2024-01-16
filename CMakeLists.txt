@@ -34,16 +34,26 @@ file(COPY ${HLSL_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # 添加所有.hlsl文件和.h文件到指定文件夹中
 file(GLOB HLSL_FILES ${HLSL_DIR}/*.hlsl)
+# 为项目附加包含目录，使其文件夹中的文件可被整个项目访问
+include_directories(DX11API)
+include_directories(DX11API/TextureLoader)
+include_directories(DX11API/InputAPI)
 
 # 设置文件目录
 set (SOURCES
 GameApp/main.cpp
+GameApp/DX11App.h
+GameApp/DX11App.cpp
  )
  
  set (DX11API
 DX11API/WinAPISetting.h
 DX11API/DXGameTimer.cpp
 DX11API/DXGameTimer.h
+DX11API/DX11Debug.cpp
+DX11API/DX11Debug.h
+DX11API/DX11Utility.cpp
+DX11API/DX11Utility.h
  )
  
  set (TextureLoader
@@ -53,12 +63,19 @@ DX11API/TextureLoader/WICTextureLoader.cpp
 DX11API/TextureLoader/WICTextureLoader.h
  )
  
+ set (InputAPI
+DX11API/KeyBoard.cpp
+DX11API/KeyBoard.h
+DX11API/Mouse.cpp
+DX11API/Mouse.h
+ )
  source_group(GameApp FILES ${SOURCES})
  source_group(DX11API FILES ${DX11API})
  source_group(DX11API\\TextureLoader FILES ${TextureLoader})
+ source_group(DX11API\\InputAPI FILES ${InputAPI})
 
 
-add_executable(newDX11Project ${SOURCES} ${DX11API} ${TextureLoader})
+add_executable(newDX11Project ${SOURCES} ${DX11API} ${TextureLoader} ${InputAPI})
 # 添加链接库
 target_link_libraries(${TARGET_NAME} d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib)
 

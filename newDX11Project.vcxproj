@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,10 +104,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;USE_IMGUI;UNICODE;_UNICODE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -148,10 +148,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;USE_IMGUI;UNICODE;_UNICODE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -174,7 +174,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -192,10 +192,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;USE_IMGUI;UNICODE;_UNICODE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -218,7 +218,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -235,10 +235,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;USE_IMGUI;UNICODE;_UNICODE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\ImGui\.;H:\DX11Project\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -318,13 +318,23 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="H:\DX11Project\GameApp\main.cpp" />
+    <ClInclude Include="H:\DX11Project\GameApp\DX11App.h" />
+    <ClCompile Include="H:\DX11Project\GameApp\DX11App.cpp" />
     <ClInclude Include="H:\DX11Project\DX11API\WinAPISetting.h" />
     <ClCompile Include="H:\DX11Project\DX11API\DXGameTimer.cpp" />
     <ClInclude Include="H:\DX11Project\DX11API\DXGameTimer.h" />
+    <ClCompile Include="H:\DX11Project\DX11API\DX11Debug.cpp" />
+    <ClInclude Include="H:\DX11Project\DX11API\DX11Debug.h" />
+    <ClCompile Include="H:\DX11Project\DX11API\DX11Utility.cpp" />
+    <ClInclude Include="H:\DX11Project\DX11API\DX11Utility.h" />
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.cpp" />
     <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\DDSTextureLoader.h" />
     <ClCompile Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.cpp" />
     <ClInclude Include="H:\DX11Project\DX11API\TextureLoader\WICTextureLoader.h" />
+    <ClCompile Include="H:\DX11Project\DX11API\Keyboard.cpp" />
+    <ClInclude Include="H:\DX11Project\DX11API\Keyboard.h" />
+    <ClCompile Include="H:\DX11Project\DX11API\Mouse.cpp" />
+    <ClInclude Include="H:\DX11Project\DX11API\Mouse.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="H:\DX11Project\ZERO_CHECK.vcxproj">

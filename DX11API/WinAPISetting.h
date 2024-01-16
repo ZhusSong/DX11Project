@@ -4,8 +4,8 @@
 #define WINMAIN_H
 
 #include <Windows.h>
-// 去除在编译过程中不需要的组件
 
+// 去除在编译过程中不需要的组件
 #ifndef FULL_WINTARD
 #define WIN32_LEAN_AND_MEAN
 #define NOGDICAPMASKS

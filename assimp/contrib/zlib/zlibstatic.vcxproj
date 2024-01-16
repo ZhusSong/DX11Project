@@ -78,7 +78,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -99,10 +99,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;UNICODE;_UNICODE;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -115,7 +115,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>4131;4127;4244;4244</DisableSpecificWarnings>
@@ -136,10 +136,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -152,7 +152,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>4131;4127;4244;4244</DisableSpecificWarnings>
@@ -173,10 +173,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -189,7 +189,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8 /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -209,10 +209,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>H:\DX11Project\assimp\include;H:\DX11Project\assimp;H:\DX11Project\assimp\code;H:\DX11Project\assimp\.;H:\DX11Project\DX11API;H:\DX11Project\DX11API\TextureLoader;H:\DX11Project\DX11API\InputAPI;H:\DX11Project\assimp\contrib\zlib;H:\DX11Project;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
