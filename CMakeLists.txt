@@ -40,22 +40,34 @@ include_directories(DX11API/TextureLoader)
 include_directories(DX11API/InputAPI)
 
 # 设置文件目录
+
+ set (HLSL_Files
+HLSL/Basic.hlsli
+HLSL/LightHelper.hlsli
+HLSL/PixelShader_2D.hlsl
+HLSL/PixelShader_3D.hlsl
+HLSL/VertexShader_2D.hlsl
+HLSL/VertexShader_3D.hlsl
+ )
 set (SOURCES
-GameApp/main.cpp
-GameApp/DX11App.h
-GameApp/DX11App.cpp
+Game/main.cpp
+Game/GameApp.cpp
+Game/GameApp.h
  )
  
  set (DX11API
 DX11API/WinAPISetting.h
 DX11API/DXGameTimer.cpp
 DX11API/DXGameTimer.h
-DX11API/DX11Debug.cpp
-DX11API/DX11Debug.h
-DX11API/DX11Utility.cpp
-DX11API/DX11Utility.h
+DX11API/DX11App.h
+DX11API/DX11App.cpp
+DX11API/LightHelper.h
  )
- 
+ set (GameObjects
+DX11API/Vertex.h
+DX11API/Vertex.cpp
+DX11API/BasicObject.h
+ )
  set (TextureLoader
  DX11API/TextureLoader/DDSTextureLoader.cpp
 DX11API/TextureLoader/DDSTextureLoader.h
@@ -69,13 +81,22 @@ DX11API/KeyBoard.h
 DX11API/Mouse.cpp
 DX11API/Mouse.h
  )
- source_group(GameApp FILES ${SOURCES})
+ set (UtilityAPI
+DX11API/DX11Debug.cpp
+DX11API/DX11Debug.h
+DX11API/DX11Utility.cpp
+DX11API/DX11Utility.h
+ )
+ source_group(HLSL FILES ${HLSL_Files})
+ source_group(Game FILES ${SOURCES})
  source_group(DX11API FILES ${DX11API})
  source_group(DX11API\\TextureLoader FILES ${TextureLoader})
  source_group(DX11API\\InputAPI FILES ${InputAPI})
+ source_group(DX11API\\UtilityAPI FILES ${UtilityAPI})
+ source_group(DX11API\\GameObjects FILES ${GameObjects})
 
 
-add_executable(newDX11Project ${SOURCES} ${DX11API} ${TextureLoader} ${InputAPI})
+add_executable(newDX11Project ${SOURCES} ${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${HLSL_Files})
 # 添加链接库
 target_link_libraries(${TARGET_NAME} d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib)
 
