@@ -605,8 +605,8 @@ void DX11App::ShowFrameCount()
         outs.precision(6);
         outs << m_MainWndName << L"    "
             << L"FPS: " << fps << L"    "
-            << L"Frame Time: " << mspf << L" (ms)" <<
-            L" MOUSE POS X is " << m_MousePosX << L" MOUSE POS Y is " << m_MousePosY
+        /*    << L"Frame Time: " << mspf << L" (ms)" */
+            << L" MOUSE POS  is (" << m_MousePosX <<L","<< m_MousePosY  << L")"
             << " delta time is " << m_Timer.GetDeltaTime();
         SetWindowText(m_MainWnd, outs.str().c_str());
 

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.8)
 
 project("newDX11Project")
 set(TARGET_NAME "newDX11Project")
@@ -15,7 +15,7 @@ set(USE_IMGUI ON)
 
 # 使用Assimp时设置为ON
 # 需要将解压的assimp文件夹内CMakeList.txt所在的全部文件复制到当前项目的Assimp文件夹内
-set(USE_ASSIMP ON)
+set(USE_ASSIMP OFF)
 
 # 设置C++标准为C++17
 set(CMAKE_CXX_STANDARD 17)
@@ -34,6 +34,43 @@ file(COPY ${HLSL_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # 添加所有.hlsl文件和.h文件到指定文件夹中
 file(GLOB HLSL_FILES ${HLSL_DIR}/*.hlsl)
+#设置HLSL文件属性
+foreach(HLSL_FILE ${HLSL_FILES})
+
+    get_filename_component(HLSL_FDIR ${HLSL_FILE} DIRECTORY)
+    get_filename_component(HLSL_FBASENAME_WE ${HLSL_FILE} NAME_WE)
+    string(CONCAT HLSL_FNAME_WE ${HLSL_FDIR} / ${HLSL_FBASENAME_WE})
+
+    string(LENGTH ${HLSL_FBASENAME_WE} LEN_FNAME_WE)
+    
+    math(EXPR LEN_FNAME_WE "${LEN_FNAME_WE}-2")
+    string(SUBSTRING ${HLSL_FBASENAME_WE} ${LEN_FNAME_WE} 2 ENTRY_POINT)
+    string(TOLOWER ${ENTRY_POINT} SHADER_TYPE)
+
+    if ("${SHADER_TYPE}" STREQUAL "vs") 
+        set(SHADER_TYPE "Vertex")
+    elseif("${SHADER_TYPE}" STREQUAL "hs") 
+        set(SHADER_TYPE "Hull")
+    elseif("${SHADER_TYPE}" STREQUAL "ds") 
+        set(SHADER_TYPE "Domain")
+    elseif("${SHADER_TYPE}" STREQUAL "gs") 
+        set(SHADER_TYPE "Geometry")
+    elseif("${SHADER_TYPE}" STREQUAL "ps")
+        set(SHADER_TYPE "Pixel")
+    elseif("${SHADER_TYPE}" STREQUAL "cs")
+        set(SHADER_TYPE "Compute")
+    endif()
+    set_source_files_properties(${HLSL_FILE} PROPERTIES
+                                VS_SHADER_OBJECT_FILE_NAME HLSL/${HLSL_FBASENAME_WE}.cso
+                                VS_SHADER_TYPE ${SHADER_TYPE}
+                                VS_SHADER_MODEL 5.0
+                                VS_SHADER_ENTRYPOINT ${ENTRY_POINT}
+                                VS_SHADER_DISABLE_OPTIMIZATIONS $<$<CONFIG:Debug>:true>
+                                VS_SHADER_ENABLE_DEBUG $<$<CONFIG:Debug>:true>)
+endforeach()
+
+
+
 # 为项目附加包含目录，使其文件夹中的文件可被整个项目访问
 include_directories(DX11API)
 include_directories(DX11API/TextureLoader)
@@ -44,13 +81,13 @@ include_directories(DX11API/InputAPI)
  set (HLSL_Files
 HLSL/Basic.hlsli
 HLSL/LightHelper.hlsli
-HLSL/PixelShader_2D.hlsl
-HLSL/PixelShader_3D.hlsl
-HLSL/VertexShader_2D.hlsl
-HLSL/VertexShader_3D.hlsl
+HLSL/PixelShader_2D_PS.hlsl
+HLSL/PixelShader_3D_PS.hlsl
+HLSL/VertexShader_2D_VS.hlsl
+HLSL/VertexShader_3D_VS.hlsl
  )
 set (SOURCES
-Game/main.cpp
+Game/newDX11Project.cpp
 Game/GameApp.cpp
 Game/GameApp.h
  )
@@ -96,14 +133,15 @@ DX11API/DX11Utility.h
  source_group(DX11API\\GameObjects FILES ${GameObjects})
 
 
-add_executable(newDX11Project ${SOURCES} ${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${HLSL_Files})
+add_executable(${TARGET_NAME} ${SOURCES} ${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${HLSL_Files})
 # 添加链接库
-target_link_libraries(${TARGET_NAME} d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib)
+target_link_libraries(${TARGET_NAME} d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib legacy_stdio_definitions.lib)
 
 # 为项目调试设置输出目录
 set_target_properties(${TARGET_NAME} PROPERTIES OUTPUT_NAME ${TARGET_NAME})
 set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR})
 set_target_properties(${TARGET_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR})
+
 
 if (${USE_IMGUI})
     add_subdirectory(ImGui)

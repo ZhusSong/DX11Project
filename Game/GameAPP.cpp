@@ -70,9 +70,9 @@ void GameApp::UpdateScene(float dt)
 	//m_MousePosY = state_mouse.y;
 
 
-	//XMMATRIX W = XMMatrixRotationX(phi) * XMMatrixRotationY(theta);
-	//m_VSConstantBuffer.world = XMMatrixTranspose(W);
-	//m_VSConstantBuffer.worldInvTranspose = XMMatrixTranspose(InverseTranspose(W));
+	XMMATRIX W = XMMatrixRotationX(phi) * XMMatrixRotationY(theta);
+	m_VSConstantBuffer.world = XMMatrixTranspose(W);
+	m_VSConstantBuffer.worldInvTranspose = XMMatrixTranspose(InverseTranspose(W));
 
 	if (ImGui::Begin("Texture Mapping"))
 	{
@@ -258,7 +258,7 @@ void GameApp::DrawScene()
 	// 绘制几何模型
 	m_D3dImmediateContext->DrawIndexed(m_IndexCount, 0, 0);
 
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	//ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 
 
