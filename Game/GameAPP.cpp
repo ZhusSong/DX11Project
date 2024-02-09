@@ -270,7 +270,7 @@ bool GameApp::InitEffect()
 	//申请内存块
 	ComPtr<ID3DBlob> blob;
 	// 创建顶点着色器(2D)
-	HR(CreateShaderFromFile(L"HLSL\\VertexShader_2D.cso", L"HLSL\\VertexShader_2D.hlsl", "VS", "vs_5_0",
+	HR(CreateShaderFromFile(L"HLSL\\VertexShader_2D_VS.cso", L"HLSL\\VertexShader_2D_VS.hlsl", "VS", "vs_5_0",
 		blob.ReleaseAndGetAddressOf()));
 	HR(m_D3dDevice->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr,
 		m_VertexShader2D.GetAddressOf()));
@@ -279,13 +279,13 @@ bool GameApp::InitEffect()
 		blob->GetBufferPointer(), blob->GetBufferSize(), m_VertexLayout2D.GetAddressOf()));
 
 	// 创建像素着色器(2D)
-	HR(CreateShaderFromFile(L"HLSL\\PixelShader_2D.cso", L"HLSL\\PixelShader_2D.hlsl", "PS", "ps_5_0",
+	HR(CreateShaderFromFile(L"HLSL\\PixelShader_2D_PS.cso", L"HLSL\\PixelShader_2D_PS.hlsl", "PS", "ps_5_0",
 		blob.ReleaseAndGetAddressOf()));
 	HR(m_D3dDevice->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr,
 		m_PixelShader2D.GetAddressOf()));
 
 	// 创建顶点着色器(3D)
-	HR(CreateShaderFromFile(L"HLSL\\VertexShader_3D.cso", L"HLSL\\VertexShader_3D.hlsl", "VS", "vs_5_0",
+	HR(CreateShaderFromFile(L"HLSL\\VertexShader_3D_VS.cso", L"HLSL\\VertexShader_3D_VS.hlsl", "VS", "vs_5_0",
 		blob.ReleaseAndGetAddressOf()));
 	HR(m_D3dDevice->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr,
 		m_VertexShader3D.GetAddressOf()));
@@ -295,7 +295,7 @@ bool GameApp::InitEffect()
 		blob->GetBufferPointer(), blob->GetBufferSize(), m_VertexLayout3D.GetAddressOf()));
 
 	// 创建像素着色器(3D)
-	HR(CreateShaderFromFile(L"HLSL\\PixelShader_3D.cso", L"HLSL\\PixelShader_3D.hlsl", "PS", "ps_5_0",
+	HR(CreateShaderFromFile(L"HLSL\\PixelShader_3D_PS.cso", L"HLSL\\PixelShader_3D_PS.hlsl", "PS", "ps_5_0",
 		blob.ReleaseAndGetAddressOf()));
 	HR(m_D3dDevice->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr,
 		m_PixelShader3D.GetAddressOf()));

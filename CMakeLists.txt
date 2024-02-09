@@ -3,9 +3,13 @@ cmake_minimum_required(VERSION 3.8)
 project("newDX11Project")
 set(TARGET_NAME "newDX11Project")
 
+#设置链接器子系统为窗口
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 # 设置HLSL文件的存放位置
 set(HLSL_DIR "HLSL")
 
+# 设置资源文件的存放位置
+set(ASSET_DIR "asset")
 # Win7系统设置为ON
 set(WIN7_SYSTEM OFF)
 
@@ -31,6 +35,9 @@ endif()
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 # 将HLSL文件夹中的内容添加到build过程
 file(COPY ${HLSL_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+# 将asset文件夹中的内容添加到build过程
+file(COPY ${ASSET_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # 添加所有.hlsl文件和.h文件到指定文件夹中
 file(GLOB HLSL_FILES ${HLSL_DIR}/*.hlsl)
@@ -135,7 +142,7 @@ DX11API/DX11Utility.h
 
 add_executable(${TARGET_NAME} ${SOURCES} ${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${HLSL_Files})
 # 添加链接库
-target_link_libraries(${TARGET_NAME} d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib legacy_stdio_definitions.lib)
+target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib legacy_stdio_definitions.lib)
 
 # 为项目调试设置输出目录
 set_target_properties(${TARGET_NAME} PROPERTIES OUTPUT_NAME ${TARGET_NAME})
