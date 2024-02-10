@@ -188,7 +188,6 @@ void GameApp::UpdateScene(float dt)
 		{
 			m_D3dImmediateContext->RSSetState(m_IsWireframeMode ? m_RSWireframe.Get() : nullptr);
 		}
-
 	}
 	ImGui::End();
 	ImGui::Render();
@@ -258,7 +257,8 @@ void GameApp::DrawScene()
 	// 绘制几何模型
 	m_D3dImmediateContext->DrawIndexed(m_IndexCount, 0, 0);
 
-	//ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	//渲染ImGui
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 
 

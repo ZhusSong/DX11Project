@@ -1,5 +1,6 @@
 #include "DX11Utility.h"
 
+//通过文件夹内已编译的hlsl文件创建shader着色器
 HRESULT CreateShaderFromFile(const WCHAR* csoFileNameInOut,
     const WCHAR* hlslFileName,
     LPCSTR entryPoint,
