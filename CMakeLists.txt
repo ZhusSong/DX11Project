@@ -98,19 +98,32 @@ Game/newDX11Project.cpp
 Game/GameApp.cpp
 Game/GameApp.h
  )
+set (Camera
+Game/Camera.h
+Game/Camera.cpp
+ )
  
  set (DX11API
+ #编译设置
 DX11API/WinAPISetting.h
+#程序时间
 DX11API/DXGameTimer.cpp
 DX11API/DXGameTimer.h
+#DX11相关API
 DX11API/DX11App.h
 DX11API/DX11App.cpp
+#灯光
 DX11API/LightHelper.h
  )
  set (GameObjects
 DX11API/Vertex.h
 DX11API/Vertex.cpp
 DX11API/BasicObject.h
+ )
+#物体移动、缩放、旋转等
+ set (Transform
+DX11API/Transform.h
+DX11API/Transform.cpp
  )
  set (TextureLoader
  DX11API/TextureLoader/DDSTextureLoader.cpp
@@ -133,14 +146,18 @@ DX11API/DX11Utility.h
  )
  source_group(HLSL FILES ${HLSL_Files})
  source_group(Game FILES ${SOURCES})
+ source_group(Game\\Camera FILES ${Camera})
  source_group(DX11API FILES ${DX11API})
  source_group(DX11API\\TextureLoader FILES ${TextureLoader})
  source_group(DX11API\\InputAPI FILES ${InputAPI})
  source_group(DX11API\\UtilityAPI FILES ${UtilityAPI})
  source_group(DX11API\\GameObjects FILES ${GameObjects})
+ source_group(DX11API\\Transform FILES ${Transform})
 
 
-add_executable(${TARGET_NAME} ${SOURCES} ${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${HLSL_Files})
+add_executable(${TARGET_NAME} ${SOURCES}  ${Camera}
+${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} 
+${HLSL_Files})
 # 添加链接库
 target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib legacy_stdio_definitions.lib)
 

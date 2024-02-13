@@ -1,5 +1,5 @@
 #include "GameApp.h"
-#include "DX11UtiliTy.h"
+#include "DX11Utility.h"
 #include "DX11Debug.h"
 using namespace DirectX;
 
