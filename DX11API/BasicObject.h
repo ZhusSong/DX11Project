@@ -1,8 +1,8 @@
 #pragma once
 
 // 生成常见的几何体网格模型
-#ifndef GEOMETRY_H_
-#define GEOMETRY_H_
+#ifndef BasicObject_H_
+#define BasicObject_H_
 
 #include <vector>
 #include <string>
@@ -10,7 +10,7 @@
 #include <functional>
 #include "Vertex.h"
 
-namespace GameObject
+namespace BasicObject
 {
     // 网格数据
     template<class VertexType = VertexPosNormalTex, class IndexType = DWORD>
@@ -90,7 +90,7 @@ namespace GameObject
 
 
 
-namespace GameObject
+namespace BasicObject
 {
     namespace Internal
     {
