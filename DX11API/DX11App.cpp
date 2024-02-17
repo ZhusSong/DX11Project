@@ -215,6 +215,11 @@ void DX11App::OnResize()
     m_ScreenViewport.MaxDepth = 1.0f;
 
     m_D3dImmediateContext->RSSetViewports(1, &m_ScreenViewport);
+
+    // 设置调试对象名
+    D3D11SetDebugObjectName(m_DepthStencilBuffer.Get(), "DepthStencilBuffer");
+    D3D11SetDebugObjectName(m_DepthStencilView.Get(), "DepthStencilView");
+    D3D11SetDebugObjectName(m_RenderTargetView.Get(), "BackBufferRTV[0]");
 }
 
 LRESULT DX11App::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -379,6 +384,9 @@ bool DX11App::InitMainWindow()
         MessageBox(0, L"RegisterClass Failed.", 0, 0);
         return false;
     }
+    // 将窗口调整到中心
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
     // Compute window rectangle dimensions based on requested client area dimensions.
     RECT R = { 0, 0, m_ViewWidth, m_ViewHeight };
@@ -387,7 +395,7 @@ bool DX11App::InitMainWindow()
     int height = R.bottom - R.top;
 
     m_MainWnd = CreateWindow(L"D3DWndClassName", m_MainWndName.c_str(),
-        WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, width, height, 0, 0, m_AppInstance, 0);
+        WS_OVERLAPPEDWINDOW, (screenWidth - width) / 2, (screenHeight - height) / 2, width, height, 0, 0, m_AppInstance, 0);
     if (!m_MainWnd)
     {
         MessageBox(0, L"CreateWindow Failed.", 0, 0);

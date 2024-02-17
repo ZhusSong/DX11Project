@@ -27,32 +27,32 @@ float Camera::GetRotationY() const
 	return m_Transform.GetRotation().y;
 }
 
-DirectX::XMFLOAT3 Camera::GetRightAxix() const
+DirectX::XMFLOAT3 Camera::GetRightAxis() const
 {
 	return  m_Transform.GetRightAxis();
 }
 
-DirectX::XMVECTOR Camera::GetRightAxixXM() const
+DirectX::XMVECTOR Camera::GetRightAxisXM() const
 {
 	return  m_Transform.GetRightAxisXM();
 }
 
-DirectX::XMFLOAT3 Camera::GetUpAxix() const
+DirectX::XMFLOAT3 Camera::GetUpAxis() const
 {
 	return  m_Transform.GetUpAxis();
 }
 
-DirectX::XMVECTOR Camera::GetUpAxixXM() const
+DirectX::XMVECTOR Camera::GetUpAxisXM() const
 {
 	return  m_Transform.GetUpAxisXM();
 }
 
-DirectX::XMFLOAT3 Camera::GetLookAxix() const
+DirectX::XMFLOAT3 Camera::GetLookAxis() const
 {
 	return  m_Transform.GetForwardAxis();
 }
 
-DirectX::XMVECTOR Camera::GetLookAxixXM() const
+DirectX::XMVECTOR Camera::GetLookAxisXM() const
 {
 	return  m_Transform.GetForwardAxisXM();
 }

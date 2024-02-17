@@ -34,16 +34,16 @@ public:
 
 	//获取摄像机的坐标轴向量
 	//获取右方向向量
-	DirectX::XMFLOAT3 GetRightAxix() const;
-	DirectX::XMVECTOR GetRightAxixXM() const;
+	DirectX::XMFLOAT3 GetRightAxis() const;
+	DirectX::XMVECTOR GetRightAxisXM() const;
 
 	//获取上方向向量
-	DirectX::XMFLOAT3 GetUpAxix() const;
-	DirectX::XMVECTOR GetUpAxixXM() const;
+	DirectX::XMFLOAT3 GetUpAxis() const;
+	DirectX::XMVECTOR GetUpAxisXM() const;
 
 	//获取前方向(视线方向)向量
-	DirectX::XMFLOAT3 GetLookAxix() const;
-	DirectX::XMVECTOR GetLookAxixXM() const;
+	DirectX::XMFLOAT3 GetLookAxis() const;
+	DirectX::XMVECTOR GetLookAxisXM() const;
 
 
 	//获取矩阵

@@ -1,5 +1,4 @@
 #include "Basic.hlsli"
-
 VertexPosHWNormalTex VS(VertexPosNormalTex vIn)
 {
     VertexPosHWNormalTex vOut;

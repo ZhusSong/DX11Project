@@ -1,18 +1,11 @@
 #include "Basic.hlsli"
-
 float4 PS(VertexPosHWNormalTex pIn) : SV_Target
 {
     //Normalized normal vector
-    //正規化法線ベクトル
     pIn.normalW = normalize(pIn.normalW);
-    
     // Vertex vector pointing to the eye
-    //目を指す頂点ベクトル
-    float3 toEyeW = normalize(g_EyePosW - pIn.posW);
-    
-    
+    float3 toEyeW = normalize(g_EyePosW-pIn.posW);
     //Initialized to 0 
-    //初期化
     float4 ambient = float4(0.0f, 0.0f, 0.0f, 0.0f);
     float4 diffuse = float4(0.0f, 0.0f, 0.0f, 0.0f);
     float4 spec = float4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -20,7 +13,6 @@ float4 PS(VertexPosHWNormalTex pIn) : SV_Target
     float4 D = float4(0.0f, 0.0f, 0.0f, 0.0f);
     float4 S = float4(0.0f, 0.0f, 0.0f, 0.0f);
     int i;
-    
     for (i = 0; i < g_NumDirLight; ++i)
     {
         ComputeDirectionalLight(g_Material, g_DirLight[i], pIn.normalW, toEyeW, A, D, S);
@@ -28,7 +20,6 @@ float4 PS(VertexPosHWNormalTex pIn) : SV_Target
         diffuse += D;
         spec += S;
     }
-    
     for (i = 0; i < g_NumPointLight; ++i)
     {
         ComputePointLight(g_Material, g_PointLight[i], pIn.posW, pIn.normalW, toEyeW, A, D, S);
@@ -36,7 +27,6 @@ float4 PS(VertexPosHWNormalTex pIn) : SV_Target
         diffuse += D;
         spec += S;
     }
-    
     for (i = 0; i < g_NumSpotLight; ++i)
     {
         ComputeSpotLight(g_Material, g_SpotLight[i], pIn.posW, pIn.normalW, toEyeW, A, D, S);
@@ -44,11 +34,8 @@ float4 PS(VertexPosHWNormalTex pIn) : SV_Target
         diffuse += D;
         spec += S;
     }
-    
-
     float4 texColor = g_Tex.Sample(g_SamLinear, pIn.tex);
     float4 litColor = texColor * (ambient + diffuse) + spec;
     litColor.a = texColor.a * g_Material.diffuse.a;
-    
     return litColor;
 }

@@ -47,13 +47,14 @@ void GameApp::OnResize()
 	if (m_Camera != nullptr)
 	{
 		m_Camera->SetFrustum(XM_PI / 3, FormRatio(), 0.5f, 1000.0f);
-		m_Camera->SetViewPort(0.0f,0.0f,(float)m_ViewWidth,(float)m_ViewHeight);
+		m_Camera->SetViewPort(0.0f, 0.0f, (float)m_ViewWidth, (float)m_ViewHeight);
 		m_CBOnResize.proj = XMMatrixTranspose(m_Camera->GetProjXM());
 
 		D3D11_MAPPED_SUBRESOURCE mappedData;
 		HR(m_D3dImmediateContext->Map(m_ConstantBuffers[2].Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
-		memcpy_s(mappedData.pData, sizeof(CBChangeOnResize), &m_CBOnResize, sizeof(CBChangeOnResize));
+		memcpy_s(mappedData.pData, sizeof(CBChangesOnResize), &m_CBOnResize, sizeof(CBChangesOnResize));
 		m_D3dImmediateContext->Unmap(m_ConstantBuffers[2].Get(), 0);
+
 	}
 }
 
@@ -74,7 +75,7 @@ void GameApp::UpdateScene(float dt)
 //	static float phi = 0.0f, theta = 0.0f;
 
 	ImGuiIO& io = ImGui::GetIO();
-	if (m_CameraMode == CameraMode::FirstPerson || m_CameraMode == CameraMode::ThirdPerson)
+	if (m_CameraMode == CameraMode::FirstPerson || m_CameraMode == CameraMode::Free)
 	{
 		//前后变量与左右变量
 			// 第一人称/自由摄像机的操作
@@ -90,16 +91,16 @@ void GameApp::UpdateScene(float dt)
 
 
 		if (m_CameraMode == CameraMode::FirstPerson)
-			camera_1st->Walk(d1 * 5.0f);
+			camera_1st->Walk(d1 * 6.0f);
 		else
-			camera_1st->MoveForward(d1 * 5.0f);
-		camera_1st->Move(d2 * 5.0f);
+			camera_1st->MoveForward(d1 * 6.0f);
+		camera_1st->Move(d2 * 6.0f);
 
 		//限制摄像机位置
 		//不允许穿地
 		XMFLOAT3 adjustedPos;
 		XMStoreFloat3(&adjustedPos, XMVectorClamp(camera_1st->GetPositionXM(),
-			XMVectorSet(-9.0f, 0.0f, -9.0f, 0.0f), XMVectorReplicate(9.0f)));
+			XMVectorSet(-8.9f, 0.0f, -8.9f, 0.0f), XMVectorReplicate(8.9f)));
 		camera_1st->SetPosition(adjustedPos);
 
 		//仅在第一人称模式移动摄像机时移动箱子
@@ -120,7 +121,7 @@ void GameApp::UpdateScene(float dt)
 			camera_3rd->RotateX(io.MouseDelta.y * 0.01f);
 			camera_3rd->RotateY(io.MouseDelta.x * 0.01f);
 		}
-		camera_3rd->Approach(-io.MouseWheel * 0.5f);
+		camera_3rd->Approach(-io.MouseWheel * 1.0f);
 	}
 
 	//更新观察矩阵
@@ -135,7 +136,7 @@ void GameApp::UpdateScene(float dt)
 		static int curr_item = 0;
 		static const char* modes[] = {
 		"First Person",
-		"Second Person",
+		"Third Person",
 		"Free"
 		};
 		if (ImGui::Combo("Camera Mode", &curr_item, modes, ARRAYSIZE(modes)))
@@ -144,11 +145,13 @@ void GameApp::UpdateScene(float dt)
 			{
 				if (!camera_1st)
 				{
-					camera_1st == std::make_shared<FirstPersonCamera>();
+					camera_1st = std::make_shared<FirstPersonCamera>();
 					camera_1st->SetFrustum(XM_PI / 3, FormRatio(), 0.5f, 1000.0f);
 					m_Camera = camera_1st;
 				}
-				camera_1st->LookTo(woodBox.GetPosition(), XMFLOAT3(0.0f, 0.0f, 0.0f), XMFLOAT3(0.0f, 1.0f, 0.0f));
+				camera_1st->LookTo(woodBox.GetPosition(), 
+					XMFLOAT3(0.0f, 0.0f, 1.0f),
+					XMFLOAT3(0.0f, 1.0f, 0.0f));
 				m_CameraMode = CameraMode::FirstPerson;
 			}
 			else if (curr_item == 1 && m_CameraMode != CameraMode::ThirdPerson)
@@ -156,7 +159,7 @@ void GameApp::UpdateScene(float dt)
 				if (!camera_3rd)
 				{
 					camera_3rd = std::make_shared<ThirdPersonCamera>();
-					camera_3rd->SetFrustum(XM_PI / 3, FormRatio(), 0.5f, 1000.0f);
+					camera_3rd->SetFrustum(XM_PI / 3,FormRatio(), 0.5f, 1000.0f);
 					m_Camera = camera_3rd;
 				}
 				XMFLOAT3 target = woodBox.GetPosition();
@@ -176,8 +179,8 @@ void GameApp::UpdateScene(float dt)
 				}
 				//从箱子上方开始移动
 				XMFLOAT3 pos = woodBox.GetPosition();
-				XMFLOAT3 to = XMFLOAT3(0.f, 0.0f, 1.0f);
-				XMFLOAT3 up = XMFLOAT3(0.f, 1.0f, 0.0f);
+				XMFLOAT3 to = XMFLOAT3(0.0f, 0.0f, 1.0f);
+				XMFLOAT3 up = XMFLOAT3(0.0f, 1.0f, 0.0f);
 				pos.y += 3;
 				camera_1st->LookTo(pos, to, up);
 
@@ -194,7 +197,7 @@ void GameApp::UpdateScene(float dt)
 
 		D3D11_MAPPED_SUBRESOURCE mappedData;
 		HR(m_D3dImmediateContext->Map(m_ConstantBuffers[1].Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
-		memcpy_s(mappedData.pData, sizeof(CBChangeEveryFrame), &m_CBFrame, sizeof(CBChangeEveryFrame));
+		memcpy_s(mappedData.pData, sizeof(CBChangesEveryFrame), &m_CBFrame, sizeof(CBChangesEveryFrame));
 		m_D3dImmediateContext->Unmap(m_ConstantBuffers[1].Get(), 0);
 		//m_MousePosX = state_mouse.x;
 		//m_MousePosY = state_mouse.y;
@@ -455,39 +458,37 @@ bool GameApp::InitResource()
 	cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
 	// 新建用于VS和PS的常量缓冲区
-	cbd.ByteWidth = sizeof(CBChangeEveryDrawing);
+	cbd.ByteWidth = sizeof(CBChangesEveryDrawing);
 	HR(m_D3dDevice->CreateBuffer(&cbd, nullptr, m_ConstantBuffers[0].GetAddressOf()));
-	cbd.ByteWidth = sizeof(CBChangeEveryFrame);
+	cbd.ByteWidth = sizeof(CBChangesEveryFrame);
 	HR(m_D3dDevice->CreateBuffer(&cbd, nullptr, m_ConstantBuffers[1].GetAddressOf()));
-	cbd.ByteWidth = sizeof(CBChangeOnResize);
+	cbd.ByteWidth = sizeof(CBChangesOnResize);
 	HR(m_D3dDevice->CreateBuffer(&cbd, nullptr, m_ConstantBuffers[2].GetAddressOf()));
-	cbd.ByteWidth = sizeof(CBChangeRarely);
+	cbd.ByteWidth = sizeof(CBChangesRarely);
 	HR(m_D3dDevice->CreateBuffer(&cbd, nullptr, m_ConstantBuffers[3].GetAddressOf()));
 
 	//初始化游戏对象
 	ComPtr<ID3D11ShaderResourceView> texture;
 	//初始化木箱
-	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr,
-		texture.GetAddressOf()));
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr, texture.GetAddressOf()));
 	m_WoodBox.SetBuffer(m_D3dDevice.Get(),BasicObject::CreateBox());
 	m_WoodBox.SetTexture(texture.Get());
 
 	//初始化地板
-	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\floor.dds", nullptr,
-		texture.ReleaseAndGetAddressOf()));
-	m_Floor.SetBuffer(m_D3dDevice.Get(), BasicObject::CreatePlane(XMFLOAT2(20.0f, 20.0f), XMFLOAT2(5.0f, 5.0f)));
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\floor.dds", nullptr, texture.ReleaseAndGetAddressOf()));
+	m_Floor.SetBuffer(m_D3dDevice.Get(),
+		BasicObject::CreatePlane(XMFLOAT2(20.0f, 20.0f), XMFLOAT2(5.0f, 5.0f)));
 	m_Floor.SetTexture(texture.Get());
 	m_Floor.GetTransform().SetPosition(0.0f, -1.0f, 0.0f);
 
 	//初始化墙体
 	m_Walls.resize(4);
-	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"..\\Texture\\brick.dds", nullptr, 
-		texture.ReleaseAndGetAddressOf()));
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\brick.dds", nullptr, texture.ReleaseAndGetAddressOf()));
 	//生成四面墙
 	for (int i = 0; i < 4; ++i)
 	{
 		m_Walls[i].SetBuffer(m_D3dDevice.Get(),
-		BasicObject::CreatePlane(XMFLOAT2(20.0f, 8.0f), XMFLOAT2(5.0f, 1.5f)));
+			BasicObject::CreatePlane(XMFLOAT2(20.0f, 8.0f), XMFLOAT2(5.0f, 1.5f)));
 		Transform& transform = m_Walls[i].GetTransform();
 		transform.SetRotation(-XM_PIDIV2, XM_PIDIV2 * i, 0.0f);
 		transform.SetPosition(i % 2 ? -10.0f * (i - 2) : 0.0f, 3.0f, i % 2 == 0 ? -10.0f * (i - 1) : 0.0f);
@@ -527,16 +528,17 @@ bool GameApp::InitResource()
 	//m_SpotLight.range = 10000.0f;
 
 	  // 初始化采样器状态
-	D3D11_SAMPLER_DESC samplerDesc;
-	ZeroMemory(&samplerDesc, sizeof(samplerDesc));
-	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-	samplerDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
-	samplerDesc.MinLOD = 0;
-	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
-	HR(m_D3dDevice->CreateSamplerState(&samplerDesc, m_SamplerState.GetAddressOf()));
+	D3D11_SAMPLER_DESC sampDesc;
+	ZeroMemory(&sampDesc, sizeof(sampDesc));
+	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	sampDesc.MinLOD = 0;
+	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	HR(m_D3dDevice->CreateSamplerState(&sampDesc, m_SamplerState.GetAddressOf()));
+
 
 	//**********************
 	//初始化常量缓冲区的值
@@ -545,23 +547,22 @@ bool GameApp::InitResource()
 	m_Camera = _camera;
 	_camera->SetViewPort(0.0f,0.0f,(float)m_ViewWidth,(float)m_ViewHeight);
 	_camera->LookAt(XMFLOAT3(), XMFLOAT3(0.0f, 0.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f));
-	
 	//初始化仅在窗口大小变化时修改的值
 	m_Camera->SetFrustum(XM_PI / 3, FormRatio(), 0.5f, 1000.0f);
-	m_CBOnResize.proj - XMMatrixTranspose(m_Camera->GetProjXM());
+	m_CBOnResize.proj = XMMatrixTranspose(m_Camera->GetProjXM());
 
 	//初始化不会变动的值
 	//环境光
 	m_CBRarely.dirLight[0].ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	m_CBRarely.dirLight[0].diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
 	m_CBRarely.dirLight[0].specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	m_CBRarely.dirLight[0].direction = XMFLOAT3(0.5f, -1.0f, 0.0f);
+	m_CBRarely.dirLight[0].direction = XMFLOAT3(0.0f, -1.0f, 0.0f);
 	// 灯光
-	m_CBRarely.pointLight[0].position= XMFLOAT3(0.0f, 10.0f, 0.0f);
+	m_CBRarely.pointLight[0].position = XMFLOAT3(0.0f, 10.0f, 0.0f);
 	m_CBRarely.pointLight[0].ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	m_CBRarely.pointLight[0].diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
-	m_CBRarely.pointLight[0].specular = XMFLOAT4(0.5f, 0.5f, 0.5f,1.0f);
-	m_CBRarely.pointLight[0].att= XMFLOAT3(0.0f, 0.1f, 0.0f);
+	m_CBRarely.pointLight[0].specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	m_CBRarely.pointLight[0].att = XMFLOAT3(0.0f, 0.1f, 0.0f);
 	m_CBRarely.pointLight[0].range = 25.0f;
 	m_CBRarely.numDirLight = 1;
 	m_CBRarely.numPointLight = 1;
@@ -569,17 +570,17 @@ bool GameApp::InitResource()
 
 	//初始化材质
 	m_CBRarely.material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	m_CBRarely.material.diffuse= XMFLOAT4(0.6f, 0.6f, 0.6f, 1.0f);
+	m_CBRarely.material.diffuse = XMFLOAT4(0.6f, 0.6f, 0.6f, 1.0f);
 	m_CBRarely.material.specular = XMFLOAT4(0.1f, 0.1f, 0.1f, 50.0f);
 
 	//更新一般不会被修改的常量缓冲区资源
 	D3D11_MAPPED_SUBRESOURCE mappedData;
 	HR(m_D3dImmediateContext->Map(m_ConstantBuffers[2].Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
-	memcpy_s(mappedData.pData, sizeof(CBChangeOnResize), &m_CBOnResize, sizeof(CBChangeOnResize));
+	memcpy_s(mappedData.pData, sizeof(CBChangesOnResize), &m_CBOnResize, sizeof(CBChangesOnResize));
 	m_D3dImmediateContext->Unmap(m_ConstantBuffers[2].Get(), 0);
 
 	HR(m_D3dImmediateContext->Map(m_ConstantBuffers[3].Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
-	memcpy_s(mappedData.pData, sizeof(CBChangeRarely), &m_CBRarely, sizeof(CBChangeRarely));
+	memcpy_s(mappedData.pData, sizeof(CBChangesRarely), &m_CBRarely, sizeof(CBChangesRarely));
 	m_D3dImmediateContext->Unmap(m_ConstantBuffers[3].Get(), 0);
 
 	// 初始化光栅化状态
@@ -679,7 +680,7 @@ void GameApp::GameObject::SetBuffer(ID3D11Device* device, const BasicObject::Mes
 	D3D11_BUFFER_DESC ibd;
 	ZeroMemory(&ibd, sizeof(ibd));
 	ibd.Usage = D3D11_USAGE_IMMUTABLE;
-	ibd.ByteWidth = sizeof(IndexType) * m_IndexCount;
+	ibd.ByteWidth = m_IndexCount * sizeof(IndexType) ;
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	ibd.CPUAccessFlags = 0;
 	// 新建索引缓冲区
@@ -705,8 +706,8 @@ void GameApp::GameObject::Draw(ID3D11DeviceContext* deviceContext)
 
 	//获取之前已经绑定到渲染管线上的常量缓冲区并进行修改
 	ComPtr<ID3D11Buffer> cBuffer = nullptr;
-	deviceContext->VSSetConstantBuffers(0, 1, cBuffer.GetAddressOf());
-	CBChangeEveryDrawing cbDrawing;
+	deviceContext->VSGetConstantBuffers(0, 1, cBuffer.GetAddressOf());
+	CBChangesEveryDrawing cbDrawing;
 
 	//内部转置
 	XMMATRIX w = m_Transform.GetLocalToWorldMatrixXM();
@@ -716,11 +717,11 @@ void GameApp::GameObject::Draw(ID3D11DeviceContext* deviceContext)
 	//更新常量缓冲区
 	D3D11_MAPPED_SUBRESOURCE mappedData;
 	HR(deviceContext->Map(cBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
-	memcpy_s(mappedData.pData, sizeof(CBChangeEveryDrawing), &cbDrawing, sizeof(CBChangeEveryDrawing));
+	memcpy_s(mappedData.pData, sizeof(CBChangesEveryDrawing), &cbDrawing, sizeof(CBChangesEveryDrawing));
 	deviceContext->Unmap(cBuffer.Get(), 0);
 
 	//设置纹理
-	deviceContext->PSGetShaderResources(0, 1, m_Texture.GetAddressOf());
+	deviceContext->PSSetShaderResources(0, 1, m_Texture.GetAddressOf());
 	//开始绘制
 	deviceContext->DrawIndexed(m_IndexCount, 0, 0);
 }

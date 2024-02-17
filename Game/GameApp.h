@@ -11,21 +11,21 @@ class GameApp : public DX11App
 public:
 
     //设置HLSL缓冲区
-    struct CBChangeEveryDrawing
+    struct CBChangesEveryDrawing
     {
         DirectX::XMMATRIX world;
         DirectX::XMMATRIX worldInvTranspose;
     };
-    struct CBChangeEveryFrame
+    struct CBChangesEveryFrame
     {
         DirectX::XMMATRIX view;
         DirectX::XMFLOAT4 eyePos;
     };
-    struct CBChangeOnResize
+    struct CBChangesOnResize
     {
         DirectX::XMMATRIX proj;
     };
-    struct CBChangeRarely
+    struct CBChangesRarely
     {
         DirectionalLight dirLight[10];
         PointLight pointLight[10];
@@ -104,12 +104,13 @@ public:
     //    float pad;		// 打包保证16字节对齐
     //    DirectX::XMFLOAT4 eyePos;
     //};
-    enum class ShowMode {
+  /*  enum class ShowMode {
         Box,
         Sphere,
         Cone,
         Effect_2D,
-    };
+    };*/
+    public:
     GameApp(HINSTANCE hInstance, const std::wstring& windowName, int initWidth, int initHeight);
     ~GameApp();
 
@@ -124,8 +125,8 @@ private:
     bool InitEffect();
     bool InitResource();
 
-    template<class VertexType>
-    bool ResetMesh(const BasicObject::MeshData<VertexType>& meshData);
+ //   template<class VertexType>
+  //  bool ResetMesh(const BasicObject::MeshData<VertexType>& meshData);
     // float posX = 0.0f;
 
      //2D顶点输入布局
@@ -149,9 +150,9 @@ private:
     // 3D像素着色器
     ComPtr<ID3D11PixelShader> m_PixelShader3D;
 
-    CBChangeEveryFrame m_CBFrame;
-    CBChangeOnResize m_CBOnResize;
-    CBChangeRarely m_CBRarely;
+    CBChangesEveryFrame m_CBFrame;
+    CBChangesOnResize m_CBOnResize;
+    CBChangesRarely m_CBRarely;
     //// 顶点缓冲区
     //ComPtr<ID3D11Buffer> m_VertexBuffer;
     ////索引缓冲区
@@ -192,7 +193,7 @@ private:
     float posX = 0.0f;
     float posY = 0.0f;
     // 当前显示的模式
-    ShowMode m_CurrMode;
+ //   ShowMode m_CurrMode;
 };
 
 

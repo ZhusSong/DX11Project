@@ -1,4 +1,3 @@
-//•ûŒüŒõ
 //DirectionalLight
 struct DirectionalLight
 {
@@ -8,7 +7,6 @@ struct DirectionalLight
     float3 direction;
     float pad;
 };
-//“_Œõ
 struct PointLight
 {
     float4 ambient;
@@ -19,7 +17,7 @@ struct PointLight
     float3 att;
     float pad;
 };
-//ãÚŒõ“”
+//é˜™å²æ‘‚
 struct SpotLight
 {
     float4 ambient;

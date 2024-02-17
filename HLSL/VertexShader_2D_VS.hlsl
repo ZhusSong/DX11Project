@@ -1,5 +1,4 @@
 #include "Basic.hlsli"
-
 //Vertex shader 2D
 VertexPosHTex VS(VertexPosTex vIn)
 {

@@ -66,7 +66,7 @@ DirectX::XMVECTOR Transform::GetForwardAxisXM() const
 
 DirectX::XMFLOAT3 Transform::GetRightAxis() const
 {
-    XMMATRIX R = XMMatrixRotationRollPitchYawFromVector(XMLoadFloat3(&m_Rotation));
+    XMMATRIX R =  XMMatrixRotationRollPitchYawFromVector(XMLoadFloat3(&m_Rotation));
     XMFLOAT3 right;
     XMStoreFloat3(&right, R.r[0]);
     return right;
