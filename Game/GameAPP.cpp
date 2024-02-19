@@ -133,8 +133,7 @@ void GameApp::UpdateScene(float dt)
 		ImGui::Text("Hold the right mouse button and drag the view");
 		ImGui::Text("The box moves only at First Person mode");
 
-		//当前摄像机类型
-		static int curr_item = 2;
+		static int curr_item = 0;
 		static const char* modes[] = {
 		"First Person",
 		"Third Person",
@@ -405,10 +404,10 @@ void GameApp::DrawScene()
 
 	//盒子稍微高一点
 	Transform& boxTransform = m_WoodBox.GetTransform();
-//	boxTransform.SetPosition(2.0f, 0.01f, 0.0f);
+	boxTransform.SetPosition(2.0f, 0.01f, 0.0f);
 	m_WoodBox.Draw(m_D3dImmediateContext.Get());
-	//boxTransform.SetPosition(-2.0f, 0.01f, 0.0f);
-	//m_WoodBox.Draw(m_D3dImmediateContext.Get());
+	boxTransform.SetPosition(-2.0f, 0.01f, 0.0f);
+	m_WoodBox.Draw(m_D3dImmediateContext.Get());
 	
 	//绘制水面
 	m_Water.Draw(m_D3dImmediateContext.Get());
@@ -579,7 +578,7 @@ bool GameApp::InitResource()
 	//**********************
 	//初始化常量缓冲区的值
 	//初始化每帧都会变动的值(摄像机)
-	m_CameraMode = CameraMode::Free;
+	m_CameraMode = CameraMode::FirstPerson;
 	auto _camera = std::make_shared<FirstPersonCamera>();
 	m_Camera = _camera;
 	_camera->SetViewPort(0.0f,0.0f,(float)m_ViewWidth,(float)m_ViewHeight);
