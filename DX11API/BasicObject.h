@@ -68,7 +68,7 @@ namespace BasicObject
     MeshData<VertexType, IndexType> CreateSprite(const DirectX::XMFLOAT2& planeSize,
         const DirectX::XMFLOAT2& maxTexCoord = { 1.0f, 1.0f }, const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
     template<class VertexType = VertexPosNormalTex, class IndexType = DWORD>
-    MeshData<VertexType, IndexType> CreateSprite(float width = 1.0f, float depth = 1.0f, float texU = 1.0f, float texV = 1.0f,
+    MeshData<VertexType, IndexType> CreateSprite(float width = 10.0f, float depth = 10.0f, float texU = 1.0f, float texV = 1.0f,
         const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
 
     // 创建一个地形
@@ -546,7 +546,7 @@ namespace BasicObject
     template<class VertexType, class IndexType>
     inline MeshData<VertexType, IndexType> CreatePlane(const DirectX::XMFLOAT2& center, const DirectX::XMFLOAT2& scale, const DirectX::XMFLOAT4& color)
     {
-        return CreateSprite<VertexType, IndexType>(center.x, center.y, scale.x, scale.y, color);
+        return CreatePlane<VertexType, IndexType>(center.x, center.y, scale.x, scale.y, color);
     }
 
     template<class VertexType, class IndexType>
@@ -584,7 +584,7 @@ namespace BasicObject
     inline MeshData<VertexType, IndexType> CreateSprite(const DirectX::XMFLOAT2& planeSize,
         const DirectX::XMFLOAT2& maxTexCoord, const DirectX::XMFLOAT4& color)
     {
-        return CreatePlane<VertexType, IndexType>(planeSize.x, planeSize.y, maxTexCoord.x, maxTexCoord.y, color);
+        return CreateSprite<VertexType, IndexType>(planeSize.x, planeSize.y, maxTexCoord.x, maxTexCoord.y, color);
     }
 
     template<class VertexType, class IndexType>
