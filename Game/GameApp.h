@@ -6,6 +6,7 @@
 #include "LightHelper.h"
 #include "BasicObject.h"
 #include "Camera.h"
+#include "RenderStates.h"
 class GameApp : public DX11App
 {
 public:
@@ -15,6 +16,7 @@ public:
     {
         DirectX::XMMATRIX world;
         DirectX::XMMATRIX worldInvTranspose;
+        Material material;
     };
     struct CBChangesEveryFrame
     {
@@ -30,7 +32,6 @@ public:
         DirectionalLight dirLight[10];
         PointLight pointLight[10];
         SpotLight spotLight[10];
-        Material material;
         int numDirLight;
         int numPointLight;
         int numSpotLight;
@@ -56,6 +57,9 @@ public:
         //设置纹理
         void SetTexture(ID3D11ShaderResourceView* texture);
 
+        //设置材质
+        void SetMaterial(const Material& material);
+
         //绘制
         void Draw(ID3D11DeviceContext* deviceContext);
 
@@ -65,6 +69,8 @@ public:
     private:
         //物体变换信息
         Transform m_Transform;
+        //材质信息
+        Material m_Material;
         //物体贴图
         ComPtr<ID3D11ShaderResourceView> m_Texture;
         //定点缓冲区
@@ -139,6 +145,7 @@ private:
 
     GameObject m_WoodBox;
     GameObject m_Floor;
+    GameObject m_Water;
     std::vector<GameObject> m_Walls;
 
     //  2D顶点着色器

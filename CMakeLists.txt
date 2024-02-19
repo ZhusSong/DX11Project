@@ -114,6 +114,9 @@ DX11API/DX11App.h
 DX11API/DX11App.cpp
 #灯光
 DX11API/LightHelper.h
+#渲染器设置
+DX11API/RenderStates.h
+DX11API/RenderStates.cpp
  )
  set (GameObjects
 DX11API/Vertex.h

@@ -1,16 +1,17 @@
-﻿#pragma once
+#pragma once
 //******************
 //提供一些渲染状态
 //******************
 #ifndef RENDERSTATES_H
 #define RENDERSTATES_H
 
-#include "WinAPISetting.h"
 #include <wrl/client.h>
 #include <d3d11_1.h>
+#include "WinAPISetting.h"
 
 class RenderStates
 {
+public:
 	template <class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 
@@ -53,7 +54,7 @@ public:
 	//深度模板状态:关闭深度测试，对指定模板值的区域进行绘制
 	static ComPtr<ID3D11DepthStencilState> DSSNoDepthTestWithStencil;
 	//深度模板状态:仅进行深度测试，不写入深度值，对指定模板值的区域进行绘制
-	static ComPtr<ID3D11DepthStencilState> DSSNoDepthWriteWhithStencil;
+	static ComPtr<ID3D11DepthStencilState> DSSNoDepthWriteWithStencil;
 };
 
 #endif

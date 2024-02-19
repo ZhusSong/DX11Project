@@ -110,9 +110,12 @@ struct Material
         const DirectX::XMFLOAT4& _reflect) :
         ambient(_ambient), diffuse(_diffuse), specular(_specular), reflect(_reflect) {}
 
-    DirectX::XMFLOAT4 ambient;
+    //环境光
+    DirectX::XMFLOAT4 ambient;  
+    //漫反射
     DirectX::XMFLOAT4 diffuse;
-    DirectX::XMFLOAT4 specular; // w = 镜面反射强度
+    //镜面反射强度
+    DirectX::XMFLOAT4 specular; 
     DirectX::XMFLOAT4 reflect;
 };
 
