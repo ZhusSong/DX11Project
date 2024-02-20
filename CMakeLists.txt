@@ -41,6 +41,9 @@ file(COPY ${ASSET_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # 添加所有.hlsl文件和.h文件到指定文件夹中
 file(GLOB HLSL_FILES ${HLSL_DIR}/*.hlsl)
+
+file(COPY ${HLSL_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 #设置HLSL文件属性
 foreach(HLSL_FILE ${HLSL_FILES})
 

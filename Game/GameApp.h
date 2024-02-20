@@ -18,6 +18,11 @@ public:
         DirectX::XMMATRIX worldInvTranspose;
         Material material;
     };
+    struct CBDrawingStates
+    {
+        int isReflection;
+        DirectX::XMFLOAT3 pad;
+    };
     struct CBChangesEveryFrame
     {
         DirectX::XMMATRIX view;
@@ -29,6 +34,9 @@ public:
     };
     struct CBChangesRarely
     {
+        //反射矩阵
+        DirectX::XMMATRIX reflection;
+
         DirectionalLight dirLight[10];
         PointLight pointLight[10];
         SpotLight spotLight[10];
@@ -140,12 +148,13 @@ private:
     //3D顶点输入布局
     ComPtr<ID3D11InputLayout> m_VertexLayout3D;
 
-    //常量缓冲区
-    ComPtr<ID3D11Buffer> m_ConstantBuffers[4];
+    //常量缓冲区,与上面设置的HLSL缓冲区数量相同
+    ComPtr<ID3D11Buffer> m_ConstantBuffers[5];
 
     GameObject m_WoodBox;
     GameObject m_Floor;
     GameObject m_Water;
+    GameObject m_Mirror;
     std::vector<GameObject> m_Walls;
 
     //  2D顶点着色器
@@ -157,8 +166,13 @@ private:
     // 3D像素着色器
     ComPtr<ID3D11PixelShader> m_PixelShader3D;
 
+    //该缓冲区存放绘制状态的变量
+    CBDrawingStates m_CBStates;
+    //该缓冲区存放每一帧进行更新的变量
     CBChangesEveryFrame m_CBFrame;
+    //该缓冲区存放仅在窗口进行变化时更新的变量
     CBChangesOnResize m_CBOnResize;
+    //该缓冲区存放不会被修改的变量
     CBChangesRarely m_CBRarely;
     //// 顶点缓冲区
     //ComPtr<ID3D11Buffer> m_VertexBuffer;
@@ -176,7 +190,7 @@ private:
     std::vector<ComPtr<ID3D11ShaderResourceView>> m_FireAnims; // 火焰纹理集
 
     //采样器状态
-    ComPtr<ID3D11SamplerState> m_SamplerState;
+    //ComPtr<ID3D11SamplerState> m_SamplerState;
 
     //摄像机
     std::shared_ptr<Camera> m_Camera;
