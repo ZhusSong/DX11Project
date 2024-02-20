@@ -6,7 +6,7 @@ Camera::~Camera()
 
 }
 
-DirectX::XMFLOAT3 Camera::GetPostion() const
+DirectX::XMFLOAT3 Camera::GetPosition() const
 {
 	return m_Transform.GetPosition();
 }

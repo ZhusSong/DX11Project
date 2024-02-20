@@ -2,28 +2,6 @@
 Texture2D g_Tex : register(t0);
 SamplerState g_SamLinear : register(s0);
 
-//cbuffer VSConstantBuffer : register(b0)
-//{
-//    matrix g_World;
-//    matrix g_View;
-//    matrix g_Proj;
-//    matrix g_WorldInvTranspose;
-//}
-
-//cbuffer PSConstantBuffer : register(b1)
-//{
-//    DirectionalLight g_DirLight[10];
-//    PointLight g_PointLight[10];
-//    SpotLight g_SpotLight[10];
-//    Material g_Material;
-//    int g_NumDirLight;
-//    int g_NumPointLight;
-//    int g_NumSpotLight;
-//    float g_Pad1;
-
-//    float3 g_EyePosW;
-//    float g_Pad2;
-//}
 
 cbuffer CBChangesEveryDrawing : register(b0)
 {
@@ -34,7 +12,7 @@ cbuffer CBChangesEveryDrawing : register(b0)
 cbuffer CBDrawingStates : register(b1)
 {
     int g_IsReflection;
-    float3 g_Pad1;
+    int g_IsShadow;
 }
 
 cbuffer CBChangesEveryFrame : register(b2)
@@ -51,13 +29,15 @@ cbuffer CBChangesOnResize : register(b3)
 cbuffer CBChangesRarely : register(b4)
 {
     matrix g_Reflection;
-    DirectionalLight g_DirLight[10];
-    PointLight g_PointLight[10];
-    SpotLight g_SpotLight[10];
-    int g_NumDirLight;
-    int g_NumPointLight;
-    int g_NumSpotLight;
-    float g_Pad;
+    matrix g_Shadow;
+    matrix m_RefShadow;
+    DirectionalLight g_DirLight[5];
+    PointLight g_PointLight[5];
+    SpotLight g_SpotLight[5];
+    //int g_NumDirLight;
+    //int g_NumPointLight;
+    //int g_NumSpotLight;
+    //float g_Pad;
 }
 struct VertexPosNormalTex
 {
@@ -75,7 +55,9 @@ struct VertexPosTex
 struct VertexPosHWNormalTex
 {
     float4 posH : SV_POSITION;
+    //在世界中的位置
     float3 posW : POSITION;
+    //法向量在世界中的位置
     float3 normalW : NORMAL;
     float2 tex : TEXCOORD;
 };

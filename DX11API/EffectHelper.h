@@ -12,7 +12,9 @@ struct AlignedType
 	static void* operator new(size_t size)
 	{
 		const size_t alignedSize = __alignof(DerivedType);
-		static_assert(alignedSize)>8, "AlignedNew is only useful for types with > 8 byte alignment! Did you forget a __declspec(align) on DerivedType?");
+
+		static_assert(alignedSize > 8, "AlignedNew is only useful for types with > 8 byte alignment! Did you forget a __declspec(align) on DerivedType?");
+
 		void* ptr = _aligned_malloc(size, alignedSize);
 
 		if (!ptr)
@@ -35,7 +37,7 @@ struct CBufferBase
 	CBufferBase() : isDirty() {}
 	~CBufferBase() = default;
 
-	bool isDirty;
+	BOOL isDirty;
 	ComPtr<ID3D11Buffer> cBuffer;
 
 	virtual HRESULT CreateBuffer(ID3D11Device* device) = 0;
@@ -48,24 +50,27 @@ struct CBufferBase
 	virtual void BindPS(ID3D11DeviceContext* deviceContext) = 0;
 };
 
+//指定HLSL对应cbuffer的索引
 template<UINT startSlot,class T>
-struct CBufferObject :CbufferBase
+struct CBufferObject :CBufferBase
 {
 	T data;
-	CBufferObject() :CBufferBase, data(){}
 
-	HRESULT CreateBuffer(ID3D11Device* device)override
+	CBufferObject() : CBufferBase(), data() {}
+
+	HRESULT CreateBuffer(ID3D11Device* device) override
 	{
 		if (cBuffer != nullptr)
 			return S_OK;
 		D3D11_BUFFER_DESC cbd;
 		ZeroMemory(&cbd, sizeof(cbd));
-		cbd.Usage = D3D11_BIND_CONSTANT_BUFFER;
+		cbd.Usage = D3D11_USAGE_DYNAMIC;
 		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		cbd.ByteWidth = sizeof(T);
 		return device->CreateBuffer(&cbd, nullptr, cBuffer.GetAddressOf());
 	}
+
 	void UpdateBuffer(ID3D11DeviceContext* deviceContext) override
 	{
 		if (isDirty)

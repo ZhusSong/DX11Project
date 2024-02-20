@@ -3,6 +3,7 @@
 #ifndef DX11Utiliy_H
 #define DX11Utiliy_H
 
+#include "WinAPISetting.h"
 #include <d3d11_1.h>          
 #include <DirectXCollision.h>  
 #include <DirectXPackedVector.h>

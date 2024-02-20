@@ -100,6 +100,8 @@ set (SOURCES
 Game/newDX11Project.cpp
 Game/GameApp.cpp
 Game/GameApp.h
+Game/GameObject.cpp
+Game/GameObject.h
  )
 set (Camera
 Game/Camera.h
@@ -171,7 +173,7 @@ add_executable(${TARGET_NAME} ${SOURCES}  ${Camera}
 ${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} ${RenderAndEffects}
 ${HLSL_Files})
 # 添加链接库
-target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib legacy_stdio_definitions.lib)
+target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib winmm.lib legacy_stdio_definitions.lib)
 
 # 为项目调试设置输出目录
 set_target_properties(${TARGET_NAME} PROPERTIES OUTPUT_NAME ${TARGET_NAME})

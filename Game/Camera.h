@@ -22,7 +22,7 @@ public:
 	virtual ~Camera() = 0;
 
 	//获取摄像机位置
-	DirectX::XMFLOAT3 GetPostion() const;
+	DirectX::XMFLOAT3 GetPosition() const;
 	DirectX::XMVECTOR GetPositionXM() const;
 
 	//获取摄像机旋转
