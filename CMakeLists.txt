@@ -117,9 +117,6 @@ DX11API/DX11App.h
 DX11API/DX11App.cpp
 #灯光
 DX11API/LightHelper.h
-#渲染器设置
-DX11API/RenderStates.h
-DX11API/RenderStates.cpp
  )
  set (GameObjects
 DX11API/Vertex.h
@@ -130,6 +127,14 @@ DX11API/BasicObject.h
  set (Transform
 DX11API/Transform.h
 DX11API/Transform.cpp
+ )
+ #渲染器描述、Effect效果描述等
+ set (RenderAndEffects
+DX11API/RenderStates.h
+DX11API/RenderStates.cpp
+DX11API/Effects.h
+DX11API/EffectHelper.h
+DX11API/BasicEffect.cpp
  )
  set (TextureLoader
  DX11API/TextureLoader/DDSTextureLoader.cpp
@@ -159,10 +164,11 @@ DX11API/DX11Utility.h
  source_group(DX11API\\UtilityAPI FILES ${UtilityAPI})
  source_group(DX11API\\GameObjects FILES ${GameObjects})
  source_group(DX11API\\Transform FILES ${Transform})
+ source_group(DX11API\\RenderAndEffects FILES ${RenderAndEffects})
 
 
 add_executable(${TARGET_NAME} ${SOURCES}  ${Camera}
-${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} 
+${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} ${RenderAndEffects}
 ${HLSL_Files})
 # 添加链接库
 target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib legacy_stdio_definitions.lib)
