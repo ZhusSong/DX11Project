@@ -5,9 +5,9 @@
 #ifndef RENDERSTATES_H
 #define RENDERSTATES_H
 
+#include "WinAPISetting.h"
 #include <wrl/client.h>
 #include <d3d11_1.h>
-#include "WinAPISetting.h"
 
 class RenderStates
 {

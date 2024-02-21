@@ -6,7 +6,7 @@ using namespace DirectX;
 
 GameApp::GameApp(HINSTANCE hInstance, const std::wstring& windowName, int initWidth, int initHeight)
 	: DX11App(hInstance, windowName, initWidth, initHeight),
-	m_CameraMode(CameraMode::FirstPerson),
+	m_CameraMode(CameraMode::ThirdPerson),
 	m_ShadowMat(),
 	m_WoodBoxMat()
 {
@@ -421,19 +421,10 @@ void GameApp::DrawScene()
 	m_BasicEffect.SetShadowState(false);
 	m_WoodBox.SetMaterial(m_WoodBoxMat);
 
-	//4.绘制透明镜面
-	//
-	//// 关闭顺逆时针裁剪
-	//// 仅对模板值为1的镜面区域绘制
-	//// 透明混合
-	//m_D3dImmediateContext->RSSetState(RenderStates::RSNoCull.Get());
-	//m_D3dImmediateContext->OMSetDepthStencilState(RenderStates::DSSDrawWithStencil.Get(), 1);
-	//m_D3dImmediateContext->OMSetBlendState(RenderStates::BSTransparent.Get(), nullptr, 0xFFFFFFFF);
-	//
-	//m_WoodBox.Draw(m_D3dImmediateContext.Get());
-	//m_Water.Draw(m_D3dImmediateContext.Get());
-	//m_Mirror.Draw(m_D3dImmediateContext.Get());
-	
+	//4.绘制透明反射物体
+	m_BasicEffect.SetRenderDefaultWithStencil(m_D3dImmediateContext.Get(), 1);
+	m_Water.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+
 	//关闭反射绘制
 	m_BasicEffect.SetReflectionState(false);
 	m_BasicEffect.SetRenderAlphaBlendWithStencil(m_D3dImmediateContext.Get(), 1);
@@ -465,12 +456,17 @@ void GameApp::DrawScene()
 	m_BasicEffect.SetShadowState(false);		// 阴影关闭
 	m_WoodBox.SetMaterial(m_WoodBoxMat);
 
+
+	//7.绘制透明的正常物体
+	m_BasicEffect.SetRenderAlphaBlend(m_D3dImmediateContext.Get());
+	//水面
+	m_Water.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+
+
 	//5.绘制透明的正常物体
 	// 
 	////笼子
 	//m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
-	//水面
-	//m_Water.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 	
 	////盒子稍微高一点
 	//Transform& boxTransform = m_WoodBox.GetTransform();
@@ -489,10 +485,7 @@ void GameApp::DrawScene()
 
 bool GameApp::InitResource()
 {
-	
-
 	//初始化游戏对象
-
 	ComPtr<ID3D11ShaderResourceView> texture;
 	//设置材质
 	Material material{};
@@ -557,14 +550,15 @@ bool GameApp::InitResource()
 	m_Walls[4].GetTransform().SetPosition(-10.0f, 3.0f, 0.0f);
 
 	//初始化水
-	//material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	//material.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f);
-	//material.specular = XMFLOAT4(0.8f, 0.8f, 0.8f, 32.0f);
-	//HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\water.dds", nullptr, texture.ReleaseAndGetAddressOf()));
-	//m_Water.SetBuffer(m_D3dDevice.Get(),
-	//	BasicObject::CreateSprite(XMFLOAT2(20.0f, 20.0f), XMFLOAT2(10.0f, 10.0f)));
-	//m_Water.SetTexture(texture.Get());
-	//m_Water.SetMaterial(material);
+	material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	material.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f);
+	material.specular = XMFLOAT4(0.8f, 0.8f, 0.8f, 32.0f);
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\water.dds", nullptr, texture.ReleaseAndGetAddressOf()));
+	m_Water.SetBuffer(m_D3dDevice.Get(),
+		BasicObject::CreateSprite(XMFLOAT2(20.0f, 20.0f), XMFLOAT2(10.0f, 10.0f)));
+	m_Water.SetTexture(texture.Get());
+	m_Water.SetMaterial(material);
+	m_Water.GetTransform().SetPosition(0.0f, -0.8f, 0.0f);
 
 	//初始化镜面
 	material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
@@ -603,7 +597,6 @@ bool GameApp::InitResource()
 	// 稍微高一点位置以显示阴影
 	m_BasicEffect.SetShadowMatrix(XMMatrixShadow(XMVectorSet(0.0f, 1.0f, 0.0f, 0.99f), XMVectorSet(0.0f, 10.0f, -10.0f, 1.0f)));
 	m_BasicEffect.SetRefShadowMatrix(XMMatrixShadow(XMVectorSet(0.0f, 1.0f, 0.0f, 0.99f), XMVectorSet(0.0f, 10.0f, 30.0f, 1.0f)));
-
 	//环境光
 	DirectionalLight dirLight;
 	dirLight.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);

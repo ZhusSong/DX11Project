@@ -36,7 +36,7 @@ private:
     //地板
     GameObject m_Floor;
     //水
-    //GameObject m_Water;
+    GameObject m_Water;
     //镜子
     GameObject m_Mirror;
     //墙体

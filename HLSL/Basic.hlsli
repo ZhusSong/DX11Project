@@ -30,7 +30,7 @@ cbuffer CBChangesRarely : register(b4)
 {
     matrix g_Reflection;
     matrix g_Shadow;
-    matrix m_RefShadow;
+    matrix g_RefShadow;
     DirectionalLight g_DirLight[5];
     PointLight g_PointLight[5];
     SpotLight g_SpotLight[5];

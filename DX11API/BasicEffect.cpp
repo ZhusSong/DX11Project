@@ -201,11 +201,12 @@ void BasicEffect::SetRenderDefault(ID3D11DeviceContext* deviceContext)
     deviceContext->IASetInputLayout(pImpl->m_VertexLayout3D.Get());
     deviceContext->VSSetShader(pImpl->m_VertexShader3D.Get(), nullptr, 0);
     deviceContext->RSSetState(nullptr);
-    deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(),nullptr,0);
-    deviceContext->PSSetSamplers(0,1,RenderStates::SSLinearWrap.GetAddressOf());
+    deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(), nullptr, 0);
+    deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
     deviceContext->OMSetDepthStencilState(nullptr, 0);
     deviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
+
 
 void BasicEffect::SetRenderAlphaBlend(ID3D11DeviceContext* deviceContext)
 {
@@ -227,7 +228,7 @@ void BasicEffect::SetRenderNoDoubleBlend(ID3D11DeviceContext* deviceContext, UIN
     deviceContext->RSSetState(RenderStates::RSNoCull.Get());
     deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(), nullptr, 0);
     deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
-    deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDoubleBlend.Get(), 0);
+    deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDoubleBlend.Get(), stencilRef);
     deviceContext->OMSetBlendState(RenderStates::BSTransparent.Get(), nullptr, 0xFFFFFFFF);
 }
 
@@ -239,7 +240,7 @@ void BasicEffect::SetWriteStencilOnly(ID3D11DeviceContext* deviceContext, UINT s
     deviceContext->RSSetState(nullptr);
     deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(), nullptr, 0);
     deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
-    deviceContext->OMSetDepthStencilState(RenderStates::DSSWriteStencil.Get(), 0);
+    deviceContext->OMSetDepthStencilState(RenderStates::DSSWriteStencil.Get(), stencilRef);
     deviceContext->OMSetBlendState(RenderStates::BSNoColorWrite.Get(), nullptr, 0xFFFFFFFF);
 }
 
@@ -299,23 +300,22 @@ void XM_CALLCONV BasicEffect::SetWorldMatrix(DirectX::FXMMATRIX W)
     pImpl->m_IsDirty = cBuffer.isDirty = true;
 }
 
-void XM_CALLCONV BasicEffect::SetViewMatrix(DirectX::FXMMATRIX V)
+void XM_CALLCONV BasicEffect::SetViewMatrix(FXMMATRIX V)
 {
     auto& cBuffer = pImpl->m_CBFrame;
     cBuffer.data.view = XMMatrixTranspose(V);
     pImpl->m_IsDirty = cBuffer.isDirty = true;
 }
 
-void XM_CALLCONV BasicEffect::SetProjMatrix(DirectX::FXMMATRIX P)
+void XM_CALLCONV BasicEffect::SetProjMatrix(FXMMATRIX P)
 {
     auto& cBuffer = pImpl->m_CBOnResize;
     cBuffer.data.proj = XMMatrixTranspose(P);
     pImpl->m_IsDirty = cBuffer.isDirty = true;
 }
 
-void XM_CALLCONV BasicEffect::SetReflectionMatrix(DirectX::FXMMATRIX R)
+void XM_CALLCONV BasicEffect::SetReflectionMatrix(FXMMATRIX R)
 {
-
     auto& cBuffer = pImpl->m_CBRarely;
     cBuffer.data.reflection = XMMatrixTranspose(R);
     pImpl->m_IsDirty = cBuffer.isDirty = true;
@@ -324,14 +324,14 @@ void XM_CALLCONV BasicEffect::SetReflectionMatrix(DirectX::FXMMATRIX R)
 void XM_CALLCONV BasicEffect::SetShadowMatrix(DirectX::FXMMATRIX S)
 {
     auto& cBuffer = pImpl->m_CBRarely;
-    cBuffer.data.reflection = XMMatrixTranspose(S);
+    cBuffer.data.shadow = XMMatrixTranspose(S);
     pImpl->m_IsDirty = cBuffer.isDirty = true;
 }
 
 void XM_CALLCONV BasicEffect::SetRefShadowMatrix(DirectX::FXMMATRIX RefS)
 {
     auto& cBuffer = pImpl->m_CBRarely;
-    cBuffer.data.reflection = XMMatrixTranspose(RefS);
+    cBuffer.data.refShadow= XMMatrixTranspose(RefS);
     pImpl->m_IsDirty = cBuffer.isDirty = true;
 }
 
