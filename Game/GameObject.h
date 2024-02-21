@@ -3,99 +3,69 @@
 #ifndef  GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "Effects.h"
+#include "Material.h"
 #include "BasicObject.h"
+#include "MeshData.h"
 #include "Transform.h"
+#include "IEffect.h"
 
 class GameObject
 {
 public:
-    template<class T>
+    template <class T>
     using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 
-    GameObject();
+    GameObject() = default;
+    ~GameObject() = default;
 
-    //获取物体变换
+    GameObject(const GameObject&) = default;
+    GameObject& operator=(const GameObject&) = default;
+
+    GameObject(GameObject&&) = default;
+    GameObject& operator=(GameObject&&) = default;
+
+    // 获取物体变换
     Transform& GetTransform();
-
     // 获取物体变换
     const Transform& GetTransform() const;
 
-    //设置缓冲区
-    template<class VertexType, class IndexType>
-    void SetBuffer(ID3D11Device* device, const BasicObject::MeshData<VertexType, IndexType>& meshData);
+    //
+    // 相交检测
+    //
+    void FrustumCulling(const DirectX::BoundingFrustum& frustumInWorld);
+    void CubeCulling(const DirectX::BoundingOrientedBox& obbInWorld);
+    void CubeCulling(const DirectX::BoundingBox& aabbInWorld);
+    bool InFrustum() const { return m_InFrustum; }
 
-    //设置纹理
-    void SetTexture(ID3D11ShaderResourceView* texture);
+    //
+    // 模型
+    //
+    void SetModel(const Model* pModel);
+    const Model* GetModel() const;
 
-    //设置材质
-    void SetMaterial(const Material& material);
+    DirectX::BoundingBox GetLocalBoundingBox() const;
+    DirectX::BoundingBox GetLocalBoundingBox(size_t idx) const;
+    DirectX::BoundingBox GetBoundingBox() const;
+    DirectX::BoundingBox GetBoundingBox(size_t idx) const;
+    DirectX::BoundingOrientedBox GetBoundingOrientedBox() const;
+    DirectX::BoundingOrientedBox GetBoundingOrientedBox(size_t idx) const;
+    //
+    // 绘制
+    //
 
-    //绘制
-    void Draw(ID3D11DeviceContext* deviceContext, BasicEffect& effect);
+    void SetVisible(bool visible) {
+        m_InFrustum = visible;
+        m_SubModelInFrustum.assign(m_SubModelInFrustum.size(), true);
+    }
 
-    // 设置调试对象名
-    // 若缓冲区被重新设置，调试对象名也需要被重新设置
-    void SetDebugObjectName(const std::string& name);
-private:
-    //物体变换信息
-    Transform m_Transform;
-    //材质信息
-    Material m_Material;
-    //物体贴图
-    ComPtr<ID3D11ShaderResourceView> m_Texture;
-    //定点缓冲区
-    ComPtr<ID3D11Buffer> m_VertexBuffer;
-    //索引缓冲区
-    ComPtr<ID3D11Buffer> m_IndexBuffer;
-    //顶点字节大小
-    UINT m_VertexStride;
-    //索引树木
-    UINT m_IndexCount;
+    // 绘制对象
+    void Draw(ID3D11DeviceContext* deviceContext, IEffect& effect);
+
+protected:
+    const Model* m_pModel = nullptr;
+    std::vector<bool> m_SubModelInFrustum;
+    Transform m_Transform = {};
+    bool m_InFrustum = true;
 };
-
-template<class VertexType, class IndexType>
-inline void GameObject::SetBuffer(ID3D11Device* device, const BasicObject::MeshData<VertexType, IndexType>& meshData)
-{
-    // 释放旧资源
-    m_VertexBuffer.Reset();
-    m_IndexBuffer.Reset();
-
-    //检查D3D设备
-    if (device == nullptr)
-        return;
-    // 设置顶点缓冲区描述
-    m_VertexStride = sizeof(VertexType);
-    D3D11_BUFFER_DESC vbd;
-    ZeroMemory(&vbd, sizeof(vbd));
-    vbd.Usage = D3D11_USAGE_IMMUTABLE;
-    vbd.ByteWidth = (UINT)meshData.vertexVec.size() * m_VertexStride;
-    vbd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-    vbd.CPUAccessFlags = 0;
-    // 新建顶点缓冲区
-    D3D11_SUBRESOURCE_DATA InitData;
-    ZeroMemory(&InitData, sizeof(InitData));
-    InitData.pSysMem = meshData.vertexVec.data();
-    device->CreateBuffer(&vbd, &InitData, m_VertexBuffer.GetAddressOf());
-
-    //// 输入装配阶段的顶点缓冲区设置
-    //UINT stride = sizeof(VertexType);	// 跨越字节数
-    //UINT offset = 0;							// 起始偏移量
-
-    // 设置索引缓冲区描述
-    m_IndexCount = (UINT)meshData.indexVec.size();
-    D3D11_BUFFER_DESC ibd;
-    ZeroMemory(&ibd, sizeof(ibd));
-    ibd.Usage = D3D11_USAGE_IMMUTABLE;
-    ibd.ByteWidth = m_IndexCount * sizeof(IndexType);
-    ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-    ibd.CPUAccessFlags = 0;
-    // 新建索引缓冲区
-    InitData.pSysMem = meshData.indexVec.data();
-    device->CreateBuffer(&ibd, &InitData, m_IndexBuffer.GetAddressOf());
-    //// 输入装配阶段的索引缓冲区设置
-    //m_D3dImmediateContext->IASetIndexBuffer(m_IndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-
-}
 #endif // ! GAMEOBJECT_H

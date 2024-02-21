@@ -120,10 +120,15 @@ DX11API/DX11App.cpp
 #灯光
 DX11API/LightHelper.h
  )
- set (GameObjects
+ #基础物体(正方体、球、2D精灵等)相关
+ set (BasicObjects
 DX11API/Vertex.h
 DX11API/Vertex.cpp
 DX11API/BasicObject.h
+ )
+ #模型相关
+ set(Models
+ DX11API/TextureManager.h
  )
 #物体移动、缩放、旋转等
  set (Transform
@@ -164,13 +169,14 @@ DX11API/DX11Utility.h
  source_group(DX11API\\TextureLoader FILES ${TextureLoader})
  source_group(DX11API\\InputAPI FILES ${InputAPI})
  source_group(DX11API\\UtilityAPI FILES ${UtilityAPI})
- source_group(DX11API\\GameObjects FILES ${GameObjects})
+ source_group(DX11API\\BasicObjects FILES ${BasicObjects})
  source_group(DX11API\\Transform FILES ${Transform})
  source_group(DX11API\\RenderAndEffects FILES ${RenderAndEffects})
+ source_group(DX11API\\Models FILES ${Models})
 
 
 add_executable(${TARGET_NAME} ${SOURCES}  ${Camera}
-${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} ${RenderAndEffects}
+${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${BasicObjects} ${Transform} ${RenderAndEffects} ${Models}
 ${HLSL_Files})
 # 添加链接库
 target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib winmm.lib legacy_stdio_definitions.lib)
