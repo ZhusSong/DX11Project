@@ -4,7 +4,7 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 
-#include "WinMin.h"
+#include "WinApiSetting.h"
 #include "D3DFormat.h"
 #include <d3d11_1.h>
 #include <wrl/client.h>

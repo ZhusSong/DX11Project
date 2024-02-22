@@ -9,6 +9,7 @@
 #include "Transform.h"
 #include "IEffect.h"
 
+struct Model;
 class GameObject
 {
 public:

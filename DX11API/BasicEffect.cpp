@@ -88,14 +88,14 @@ bool BasicEffect::InitAll(ID3D11Device* device)
 
     Microsoft::WRL::ComPtr<ID3DBlob> blob;
     // 创建顶点着色器
-    pImpl->m_pEffectHelper->CreateShaderFromFile("BasicVS", L"Shaders/Basic_VS.cso", device,
+    pImpl->m_pEffectHelper->CreateShaderFromFile("BasicVS", L"HLSL/Basic_VS.cso", device,
         nullptr, nullptr, nullptr, blob.GetAddressOf());
     // 创建顶点布局
     HR(device->CreateInputLayout(VertexPosNormalTex::GetInputLayout(), ARRAYSIZE(VertexPosNormalTex::GetInputLayout()),
         blob->GetBufferPointer(), blob->GetBufferSize(), pImpl->m_pVertexPosNormalTexLayout.GetAddressOf()));
 
     // 创建像素着色器
-    pImpl->m_pEffectHelper->CreateShaderFromFile("BasicPS", L"Shaders/Basic_PS.cso", device);
+    pImpl->m_pEffectHelper->CreateShaderFromFile("BasicPS", L"HLSL/Basic_PS.cso", device);
 
 
     // 创建通道
@@ -129,8 +129,6 @@ void XM_CALLCONV BasicEffect::SetProjMatrix(DirectX::FXMMATRIX P)
 {
     XMStoreFloat4x4(&pImpl->m_Proj, P);
 }
-
-
 
 void BasicEffect::SetMaterial(const Material& material)
 {
@@ -168,17 +166,17 @@ MeshDataInput BasicEffect::GetInputData(const MeshData& meshData)
     return input;
 }
 
-void BasicEffect::SetDirLight(size_t pos, const DirectionalLight& dirLight)
+void BasicEffect::SetDirLight(uint32_t pos, const DirectionalLight& dirLight)
 {
     pImpl->m_pEffectHelper->GetConstantBufferVariable("g_DirLight")->SetRaw(&dirLight, (sizeof dirLight) * pos, sizeof dirLight);
 }
 
-void BasicEffect::SetPointLight(size_t pos, const PointLight& pointLight)
+void BasicEffect::SetPointLight(uint32_t pos, const PointLight& pointLight)
 {
     pImpl->m_pEffectHelper->GetConstantBufferVariable("g_PointLight")->SetRaw(&pointLight, (sizeof pointLight) * pos, sizeof pointLight);
 }
 
-void BasicEffect::SetSpotLight(size_t pos, const SpotLight& spotLight)
+void BasicEffect::SetSpotLight(uint32_t pos, const SpotLight& spotLight)
 {
     pImpl->m_pEffectHelper->GetConstantBufferVariable("g_SpotLight")->SetRaw(&spotLight, (sizeof spotLight) * pos, sizeof spotLight);
 }

@@ -1,5 +1,0 @@
-# CMake generation dependency list for this directory.
-E:/CMakeGui/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake
-E:/CMakeGui/share/cmake-3.28/Modules/FindPackageMessage.cmake
-H:/DX11Project/assimp/cmake-modules/FindRT.cmake
-H:/DX11Project/assimp/code/CMakeLists.txt

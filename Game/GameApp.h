@@ -2,25 +2,23 @@
 #ifndef GAMEAPP_H
 #define GAMEAPP_H
 
+#include <WinApiSetting.h>
 #include "DX11App.h"
+#include "Effects.h"
 #include "Camera.h"
+#include <RenderStates.h>
 #include "GameObject.h"
-class GameApp : public DX11App
-{
-public:
-  
-    //摄像机模式
-    enum class CameraMode {
-        FirstPerson,
-        ThirdPerson,
-        Free,
-    };
+#include <Texture2D.h>
+#include <Buffer.h>
+#include <ModelManager.h>
+#include <TextureManager.h>
 
-    public:
+class GameApp : public D3DApp
+{
+
+public:
     GameApp(HINSTANCE hInstance, const std::wstring& windowName, int initWidth, int initHeight);
     ~GameApp();
-
-
 
     bool Init();
     void OnResize();
@@ -29,39 +27,19 @@ public:
 
 private:
     bool InitResource();
+private:
 
- 
-    //盒子
-    GameObject m_WoodBox;
-    //地板
-    GameObject m_Floor;
-    //水
-    GameObject m_Water;
-    //镜子
-    GameObject m_Mirror;
-    //墙体
-    std::vector<GameObject> m_Walls;
+    TextureManager m_TextureManager;
+    ModelManager m_ModelManager;
 
-    // 阴影材质
-    Material m_ShadowMat;	
-    // 木盒材质
-    Material m_WoodBoxMat;								
+    BasicEffect m_BasicEffect;                                  // 对象渲染特效管理
 
-    //效果声明
-    BasicEffect m_BasicEffect;
+    std::unique_ptr<Depth2D> m_pDepthTexture;                   // 深度缓冲区
 
-    // 绘制物体的索引数组大小
-    UINT m_IndexCount;
-    //当前动画播放到第几帧
-    int m_CurrFrame;
+    GameObject m_House;										    // 房屋
+    GameObject m_Ground;										// 地面
 
-   
-
-
-    //摄像机
-    std::shared_ptr<Camera> m_Camera;
-    CameraMode m_CameraMode;
- 
+    std::shared_ptr<ThirdPersonCamera> m_pCamera;				// 摄像机
 };
 
 
