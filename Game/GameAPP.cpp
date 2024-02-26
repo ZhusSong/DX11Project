@@ -4,7 +4,14 @@
 using namespace DirectX;
 
 GameApp::GameApp(HINSTANCE hInstance, const std::wstring& windowName, int initWidth, int initHeight)
+<<<<<<< HEAD
     : D3DApp(hInstance, windowName, initWidth, initHeight)
+=======
+	: DX11App(hInstance, windowName, initWidth, initHeight),
+	m_CameraMode(CameraMode::FirstPerson),
+	m_ShadowMat(),
+	m_WoodBoxMat()
+>>>>>>> parent of 8da2e06 (24.2.21)
 {
 }
 
@@ -81,6 +88,7 @@ void GameApp::UpdateScene(float dt)
 
 void GameApp::DrawScene()
 {
+<<<<<<< HEAD
     // 创建后备缓冲区的渲染目标视图
     if (m_FrameCount < m_BackBufferCount)
     {
@@ -89,6 +97,84 @@ void GameApp::DrawScene()
         CD3D11_RENDER_TARGET_VIEW_DESC rtvDesc(D3D11_RTV_DIMENSION_TEXTURE2D, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
         m_pd3dDevice->CreateRenderTargetView(pBackBuffer.Get(), &rtvDesc, m_pRenderTargetViews[m_FrameCount].ReleaseAndGetAddressOf());
     }
+=======
+	assert(m_D3dImmediateContext);
+	assert(m_SwapChain);
+
+	//static float black[4] = { 0.0f,0.0f,0.0f,1.0f };
+	m_D3dImmediateContext->ClearRenderTargetView(m_RenderTargetView.Get(), reinterpret_cast<const float*>(&Colors::Black));
+	m_D3dImmediateContext->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+	// ******************
+	// 1. 给镜面反射区域写入值1到模板缓冲区
+	// 
+	
+	// 裁剪掉背面三角形
+	// 标记镜面区域的模板值为1
+	// 不写入像素颜色
+	m_BasicEffect.SetWriteStencilOnly(m_D3dImmediateContext.Get(), 1);
+	m_Mirror.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+
+	//m_D3dImmediateContext->RSSetState(nullptr);
+	//m_D3dImmediateContext->OMSetDepthStencilState(RenderStates::DSSWriteStencil.Get(), 1);
+	//m_D3dImmediateContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
+	//m_Mirror.Draw(m_D3dImmediateContext.Get());
+
+	// 2. 绘制不透明的反射物体
+	//
+
+	//开启反射绘制
+
+	m_BasicEffect.SetReflectionState(true);
+	m_BasicEffect.SetRenderDefaultWithStencil(m_D3dImmediateContext.Get(), 1);
+
+	m_Walls[2].Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_Walls[3].Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_Walls[4].Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_Floor.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	//m_CBStates.isReflection = true;
+	//D3D11_MAPPED_SUBRESOURCE mappedData;
+	//HR(m_D3dImmediateContext->Map(m_ConstantBuffers[1].Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
+	//memcpy_s(mappedData.pData, sizeof(CBDrawingStates), &m_CBStates, sizeof(CBDrawingStates));
+	//m_D3dImmediateContext->Unmap(m_ConstantBuffers[1].Get(), 0);
+
+	// 3. 绘制不透明反射物体的阴影
+	//
+	m_WoodBox.SetMaterial(m_ShadowMat);
+	// 反射开启，阴影开启	
+	m_BasicEffect.SetShadowState(true);			
+	m_BasicEffect.SetRenderNoDoubleBlend(m_D3dImmediateContext.Get(), 1);
+
+	m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+
+	// 恢复到原来的状态
+	m_BasicEffect.SetShadowState(false);
+	m_WoodBox.SetMaterial(m_WoodBoxMat);
+
+	//4.绘制透明镜面
+	//
+	//// 关闭顺逆时针裁剪
+	//// 仅对模板值为1的镜面区域绘制
+	//// 透明混合
+	//m_D3dImmediateContext->RSSetState(RenderStates::RSNoCull.Get());
+	//m_D3dImmediateContext->OMSetDepthStencilState(RenderStates::DSSDrawWithStencil.Get(), 1);
+	//m_D3dImmediateContext->OMSetBlendState(RenderStates::BSTransparent.Get(), nullptr, 0xFFFFFFFF);
+	//
+	//m_WoodBox.Draw(m_D3dImmediateContext.Get());
+	//m_Water.Draw(m_D3dImmediateContext.Get());
+	//m_Mirror.Draw(m_D3dImmediateContext.Get());
+	
+	//关闭反射绘制
+	m_BasicEffect.SetReflectionState(false);
+	m_BasicEffect.SetRenderAlphaBlendWithStencil(m_D3dImmediateContext.Get(), 1);
+
+	m_Mirror.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	//m_CBStates.isReflection = false;
+	//HR(m_D3dImmediateContext->Map(m_ConstantBuffers[1].Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
+	//memcpy_s(mappedData.pData, sizeof(CBDrawingStates), &m_CBStates, sizeof(CBDrawingStates));
+	//m_D3dImmediateContext->Unmap(m_ConstantBuffers[1].Get(), 0);
+>>>>>>> parent of 8da2e06 (24.2.21)
 
 
     float black[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -105,13 +191,39 @@ void GameApp::DrawScene()
 
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
+<<<<<<< HEAD
     HR(m_pSwapChain->Present(0, m_IsDxgiFlipModel ? DXGI_PRESENT_ALLOW_TEARING : 0));
+=======
+	m_BasicEffect.SetShadowState(false);		// 阴影关闭
+	m_WoodBox.SetMaterial(m_WoodBoxMat);
+
+	//5.绘制透明的正常物体
+	// 
+	////笼子
+	//m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	//水面
+	//m_Water.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	
+	////盒子稍微高一点
+	//Transform& boxTransform = m_WoodBox.GetTransform();
+	//boxTransform.SetPosition(2.0f, 0.01f, 0.0f);
+	//m_WoodBox.Draw(m_D3dImmediateContext.Get());
+	//boxTransform.SetPosition(-2.0f, 0.01f, 0.0f);
+	//m_WoodBox.Draw(m_D3dImmediateContext.Get());
+
+	//渲染ImGui
+	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+
+	HR(m_SwapChain->Present(0, 0));
+>>>>>>> parent of 8da2e06 (24.2.21)
 }
 
 
 
 bool GameApp::InitResource()
 {
+<<<<<<< HEAD
     // ******************
     // 初始化游戏对象
     //
@@ -120,6 +232,113 @@ bool GameApp::InitResource()
     Model* pModel = m_ModelManager.CreateFromFile("asset\\ground_19.obj");
     m_Ground.SetModel(pModel);
     pModel->SetDebugObjectName("ground_19");
+=======
+	
+
+	//初始化游戏对象
+
+	ComPtr<ID3D11ShaderResourceView> texture;
+	//设置材质
+	Material material{};
+	material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	material.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	material.specular = XMFLOAT4(0.2f, 0.2f, 0.2f, 16.0f);
+
+	m_WoodBoxMat = material;
+	m_ShadowMat.ambient = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+	m_ShadowMat.diffuse = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.5f);
+	m_ShadowMat.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 16.0f);
+
+	//初始化木箱
+	//HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr, texture.GetAddressOf()));
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr, texture.GetAddressOf()));
+	m_WoodBox.SetBuffer(m_D3dDevice.Get(),BasicObject::CreateBox());
+	//稍微抬高避免深度冲突
+	m_WoodBox.GetTransform().SetPosition(0.0f, 0.01f, 5.0f);
+	m_WoodBox.SetTexture(texture.Get());
+	m_WoodBox.SetMaterial(material);
+
+	//初始化地板
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\floor.dds", nullptr, texture.ReleaseAndGetAddressOf()));
+	m_Floor.SetBuffer(m_D3dDevice.Get(),
+		BasicObject::CreateSprite(XMFLOAT2(20.0f, 20.0f), XMFLOAT2(5.0f, 5.0f)));
+	m_Floor.SetTexture(texture.Get());
+	m_Floor.SetMaterial(material);
+	m_Floor.GetTransform().SetPosition(0.0f, -1.0f, 0.0f);
+
+	//初始化墙体
+	m_Walls.resize(5);
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\brick.dds", nullptr, texture.ReleaseAndGetAddressOf()));
+	// 这里控制墙体五个面的生成，0和1的中间位置用于放置镜面
+	//     ____     ____
+	//    /| 0 |   | 1 |\
+    //   /4|___|___|___|2\
+    //  /_/_ _ _ _ _ _ _\_\
+    // | /       3       \ |
+	// |/_________________\|
+	//
+	//生成四面墙
+	for (int i = 0; i < 5; ++i)
+	{
+		m_Walls[i].SetMaterial(material);
+		m_Walls[i].SetTexture(texture.Get());
+	}
+	m_Walls[0].SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSprite(XMFLOAT2(6.0f, 8.0f), XMFLOAT2(1.5f, 2.0f)));
+	m_Walls[1].SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSprite(XMFLOAT2(6.0f, 8.0f), XMFLOAT2(1.5f, 2.0f)));
+	m_Walls[2].SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSprite(XMFLOAT2(20.0f, 8.0f), XMFLOAT2(5.0f, 2.0f)));
+	m_Walls[3].SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSprite(XMFLOAT2(20.0f, 8.0f), XMFLOAT2(5.0f, 2.0f)));
+	m_Walls[4].SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSprite(XMFLOAT2(20.0f, 8.0f), XMFLOAT2(5.0f, 2.0f)));
+
+	m_Walls[0].GetTransform().SetRotation(-XM_PIDIV2, 0.0f, 0.0f);
+	m_Walls[0].GetTransform().SetPosition(-7.0f, 3.0f, 10.0f);
+	m_Walls[1].GetTransform().SetRotation(-XM_PIDIV2, 0.0f, 0.0f);
+	m_Walls[1].GetTransform().SetPosition(7.0f, 3.0f, 10.0f);
+	m_Walls[2].GetTransform().SetRotation(-XM_PIDIV2, XM_PIDIV2, 0.0f);
+	m_Walls[2].GetTransform().SetPosition(10.0f, 3.0f, 0.0f);
+	m_Walls[3].GetTransform().SetRotation(-XM_PIDIV2, XM_PI, 0.0f);
+	m_Walls[3].GetTransform().SetPosition(0.0f, 3.0f, -10.0f);
+	m_Walls[4].GetTransform().SetRotation(-XM_PIDIV2, -XM_PIDIV2, 0.0f);
+	m_Walls[4].GetTransform().SetPosition(-10.0f, 3.0f, 0.0f);
+
+	//初始化水
+	//material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	//material.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f);
+	//material.specular = XMFLOAT4(0.8f, 0.8f, 0.8f, 32.0f);
+	//HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\water.dds", nullptr, texture.ReleaseAndGetAddressOf()));
+	//m_Water.SetBuffer(m_D3dDevice.Get(),
+	//	BasicObject::CreateSprite(XMFLOAT2(20.0f, 20.0f), XMFLOAT2(10.0f, 10.0f)));
+	//m_Water.SetTexture(texture.Get());
+	//m_Water.SetMaterial(material);
+
+	//初始化镜面
+	material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	material.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f);
+	material.specular = XMFLOAT4(0.4f, 0.4f, 0.4f, 16.0f);
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\ice.dds", nullptr, texture.ReleaseAndGetAddressOf()));
+	m_Mirror.SetBuffer(m_D3dDevice.Get(),BasicObject::CreateSprite(XMFLOAT2(8.0f, 8.0f), XMFLOAT2(1.0f, 1.0f)));
+	m_Mirror.GetTransform().SetRotation(-XM_PIDIV2, 0.0f, 0.0f);
+	m_Mirror.GetTransform().SetPosition(0.0f, 3.0f, 10.0f);
+	m_Mirror.SetTexture(texture.Get());
+	m_Mirror.SetMaterial(material);
+
+	//初始化摄像机
+	//
+	
+	//初始化每帧都会变动的值(摄像机)
+	auto camera = std::make_shared<ThirdPersonCamera>();
+	m_Camera = camera;
+	camera->SetViewPort(0.0f, 0.0f, (float)m_ViewWidth, (float)m_ViewHeight);
+	camera->SetDistance(5.0f);
+	camera->SetDistanceMinMax(2.0f, 14.0f);
+	camera->SetRotationX(XM_PIDIV2);
+
+	m_BasicEffect.SetViewMatrix(m_Camera->GetViewXM());
+	m_BasicEffect.SetEyePos(m_Camera->GetPosition());
+
+	m_Camera->SetFrustum(XM_PI / 3, FormRatio(), 0.5f, 1000.0f);
+
+	m_BasicEffect.SetProjMatrix(m_Camera->GetProjXM());
+>>>>>>> parent of 8da2e06 (24.2.21)
 
 
     // 初始化房屋模型
@@ -127,6 +346,7 @@ bool GameApp::InitResource()
     m_House.SetModel(pModel);
     pModel->SetDebugObjectName("house");
 
+<<<<<<< HEAD
     // 获取房屋包围盒
     XMMATRIX S = XMMatrixScaling(0.015f, 0.015f, 0.015f);
     BoundingBox houseBox = m_House.GetModel()->boundingbox;
@@ -135,6 +355,23 @@ bool GameApp::InitResource()
     Transform& houseTransform = m_House.GetTransform();
     houseTransform.SetScale(0.015f, 0.015f, 0.015f);
     houseTransform.SetPosition(0.0f, -(houseBox.Center.y - houseBox.Extents.y + 1.0f), 0.0f);
+=======
+	// 稍微高一点位置以显示阴影
+	m_BasicEffect.SetShadowMatrix(XMMatrixShadow(XMVectorSet(0.0f, 1.0f, 0.0f, 0.99f), XMVectorSet(0.0f, 10.0f, -10.0f, 1.0f)));
+	m_BasicEffect.SetRefShadowMatrix(XMMatrixShadow(XMVectorSet(0.0f, 1.0f, 0.0f, 0.99f), XMVectorSet(0.0f, 10.0f, 30.0f, 1.0f)));
+
+	//环境光
+	DirectionalLight dirLight;
+	dirLight.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	dirLight.diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
+	dirLight.specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	dirLight.direction = XMFLOAT3(0.0f, -1.0f, 0.0f);
+	m_BasicEffect.SetDirLight(0, dirLight);
+	/*m_CBRarely.dirLight[0].ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	m_CBRarely.dirLight[0].diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
+	m_CBRarely.dirLight[0].specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	m_CBRarely.dirLight[0].direction = XMFLOAT3(0.0f, -1.0f, 0.0f);*/
+>>>>>>> parent of 8da2e06 (24.2.21)
 
     // ******************
     // 初始化摄像机

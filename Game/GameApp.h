@@ -29,8 +29,22 @@ private:
     bool InitResource();
 private:
 
+<<<<<<< HEAD
     TextureManager m_TextureManager;
     ModelManager m_ModelManager;
+=======
+ 
+    //盒子
+    GameObject m_WoodBox;
+    //地板
+    GameObject m_Floor;
+    //水
+    //GameObject m_Water;
+    //镜子
+    GameObject m_Mirror;
+    //墙体
+    std::vector<GameObject> m_Walls;
+>>>>>>> parent of 8da2e06 (24.2.21)
 
     BasicEffect m_BasicEffect;                                  // 对象渲染特效管理
 

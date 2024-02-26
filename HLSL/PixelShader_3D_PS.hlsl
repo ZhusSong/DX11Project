@@ -55,7 +55,7 @@ float4 PS(VertexPosHWNormalTex pIn) : SV_Target
         {
             pointLight.position = (float3) mul(float4(pointLight.position, 1.0f), g_Reflection);
         }
-        ComputePointLight(g_Material, pointLight, pIn.posW, pIn.normalW, toEyeW, A, D, S);
+        ComputePointLight(g_Material, g_PointLight[i], pIn.posW, pIn.normalW, toEyeW, A, D, S);
         ambient += A;
         diffuse += D;
         spec += S;
@@ -73,7 +73,7 @@ float4 PS(VertexPosHWNormalTex pIn) : SV_Target
             spotLight.position = (float3) mul(float4(spotLight.position, 1.0f), g_Reflection);
             spotLight.direction = mul(spotLight.direction, (float3x3) g_Reflection);
         }
-        ComputeSpotLight(g_Material, spotLight, pIn.posW, pIn.normalW, toEyeW, A, D, S);
+        ComputeSpotLight(g_Material, g_SpotLight[i], pIn.posW, pIn.normalW, toEyeW, A, D, S);
         ambient += A;
         diffuse += D;
         spec += S;

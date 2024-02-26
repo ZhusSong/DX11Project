@@ -19,6 +19,17 @@ cbuffer CBChangesEveryFrame : register(b1)
 
 cbuffer CBChangesRarely : register(b2)
 {
+<<<<<<< HEAD
+=======
+    matrix g_Proj;
+}
+
+cbuffer CBChangesRarely : register(b4)
+{
+    matrix g_Reflection;
+    matrix g_Shadow;
+    matrix m_RefShadow;
+>>>>>>> parent of 8da2e06 (24.2.21)
     DirectionalLight g_DirLight[5];
     PointLight g_PointLight[5];
     SpotLight g_SpotLight[5];
