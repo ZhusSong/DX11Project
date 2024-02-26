@@ -19,7 +19,7 @@ set(USE_IMGUI ON)
 
 # 使用Assimp时设置为ON
 # 需要将解压的assimp文件夹内CMakeList.txt所在的全部文件复制到当前项目的Assimp文件夹内
-set(USE_ASSIMP ON)
+set(USE_ASSIMP OFF)
 
 # 设置C++标准为C++17
 set(CMAKE_CXX_STANDARD 17)
@@ -91,8 +91,10 @@ include_directories(DX11API/InputAPI)
  set (HLSL_Files
 HLSL/Basic.hlsli
 HLSL/LightHelper.hlsli
-HLSL/Basic_PS.hlsl
-HLSL/Basic_VS.hlsl
+HLSL/PixelShader_2D_PS.hlsl
+HLSL/PixelShader_3D_PS.hlsl
+HLSL/VertexShader_2D_VS.hlsl
+HLSL/VertexShader_3D_VS.hlsl
  )
 set (SOURCES
 Game/newDX11Project.cpp
@@ -117,29 +119,11 @@ DX11API/DX11App.h
 DX11API/DX11App.cpp
 #灯光
 DX11API/LightHelper.h
-
-DX11API/D3DFormat.h
-DX11API/ImGuiLog.h
-DX11API/ImGuiLog.cpp
-DX11API/Property.h
-DX11API/stb_image.h
-
  )
- #基础物体(正方体、球、2D精灵等)相关
- set (BasicObjects
+ set (GameObjects
 DX11API/Vertex.h
+DX11API/Vertex.cpp
 DX11API/BasicObject.h
- )
- #模型相关
- set(Models
- DX11API/TextureManager.h
- DX11API/TextureManager.cpp
- DX11API/ModelManager.h
- DX11API/ModelManager.cpp
- DX11API/Material.h
- DX11API/MeshData.h
- DX11API/Texture2D.h
- DX11API/Texture2D.cpp
  )
 #物体移动、缩放、旋转等
  set (Transform
@@ -152,11 +136,7 @@ DX11API/RenderStates.h
 DX11API/RenderStates.cpp
 DX11API/Effects.h
 DX11API/EffectHelper.h
-DX11API/EffectHelper.cpp
 DX11API/BasicEffect.cpp
-DX11API/IEffect.h
-DX11API/Buffer.h
-DX11API/Buffer.cpp
  )
  set (TextureLoader
  DX11API/TextureLoader/DDSTextureLoader.cpp
@@ -184,17 +164,16 @@ DX11API/DX11Utility.h
  source_group(DX11API\\TextureLoader FILES ${TextureLoader})
  source_group(DX11API\\InputAPI FILES ${InputAPI})
  source_group(DX11API\\UtilityAPI FILES ${UtilityAPI})
- source_group(DX11API\\BasicObjects FILES ${BasicObjects})
+ source_group(DX11API\\GameObjects FILES ${GameObjects})
  source_group(DX11API\\Transform FILES ${Transform})
  source_group(DX11API\\RenderAndEffects FILES ${RenderAndEffects})
- source_group(DX11API\\Models FILES ${Models})
 
 
 add_executable(${TARGET_NAME} ${SOURCES}  ${Camera}
-${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${BasicObjects} ${Transform} ${RenderAndEffects} ${Models}
+${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} ${RenderAndEffects}
 ${HLSL_Files})
 # 添加链接库
-target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib winmm.lib legacy_stdio_definitions.lib assimp-vc143-mtd.lib)
+target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib winmm.lib legacy_stdio_definitions.lib)
 
 # 为项目调试设置输出目录
 set_target_properties(${TARGET_NAME} PROPERTIES OUTPUT_NAME ${TARGET_NAME})
@@ -214,6 +193,7 @@ if (${USE_ASSIMP})
     set(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
     set(ASSIMP_BUILD_TESTS OFF)
     set(ASSIMP_INSTALL OFF)
+    set(BUILD_SHARED_LIBS OFF)
     set(ASSIMP_INJECT_DEBUG_POSTFIX OFF)
     add_subdirectory("assimp")
     target_link_libraries(${TARGET_NAME} assimp)

@@ -7,12 +7,9 @@
 
 #ifndef  VERTEX_H
 #define VERTEX_H
-#include "WinApiSetting.h"
 #include<d3d11_1.h>
 #include<DirectXMath.h>
 
-template<size_t numElements>
-using D3D11_INPUT_ELEMENT_DESC_ARRAY = const D3D11_INPUT_ELEMENT_DESC(&)[numElements];
 
 struct VertexPos
 {
@@ -27,14 +24,7 @@ struct VertexPos
     constexpr VertexPos(const DirectX::XMFLOAT3& _pos) : pos(_pos) {}
 
     DirectX::XMFLOAT3 pos;
-
-    static D3D11_INPUT_ELEMENT_DESC_ARRAY<1> GetInputLayout()
-    {
-        static const D3D11_INPUT_ELEMENT_DESC inputLayout[1] = {
-            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-        };
-        return inputLayout;
-    }
+    static const D3D11_INPUT_ELEMENT_DESC inputLayout[1];
 };
 
 struct VertexPosColor
@@ -52,15 +42,7 @@ struct VertexPosColor
 
     DirectX::XMFLOAT3 pos;
     DirectX::XMFLOAT4 color;
-
-    static D3D11_INPUT_ELEMENT_DESC_ARRAY<2> GetInputLayout()
-    {
-        static const D3D11_INPUT_ELEMENT_DESC inputLayout[2] = {
-            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-        };
-        return inputLayout;
-    }
+    static const D3D11_INPUT_ELEMENT_DESC inputLayout[2];
 };
 
 struct VertexPosTex
@@ -78,15 +60,7 @@ struct VertexPosTex
 
     DirectX::XMFLOAT3 pos;
     DirectX::XMFLOAT2 tex;
-
-    static D3D11_INPUT_ELEMENT_DESC_ARRAY<2> GetInputLayout()
-    {
-        static const D3D11_INPUT_ELEMENT_DESC inputLayout[2] = {
-            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-        };
-        return inputLayout;
-    }
+    static const D3D11_INPUT_ELEMENT_DESC inputLayout[2];
 };
 
 struct VertexPosSize
@@ -104,14 +78,7 @@ struct VertexPosSize
 
     DirectX::XMFLOAT3 pos;
     DirectX::XMFLOAT2 size;
-    static D3D11_INPUT_ELEMENT_DESC_ARRAY<2> GetInputLayout()
-    {
-        static const D3D11_INPUT_ELEMENT_DESC inputLayout[2] = {
-            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "SIZE", 0, DXGI_FORMAT_R32G32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-        };
-        return inputLayout;
-    }
+    static const D3D11_INPUT_ELEMENT_DESC inputLayout[2];
 };
 
 struct VertexPosNormalColor
@@ -131,16 +98,7 @@ struct VertexPosNormalColor
     DirectX::XMFLOAT3 pos;
     DirectX::XMFLOAT3 normal;
     DirectX::XMFLOAT4 color;
-
-    static D3D11_INPUT_ELEMENT_DESC_ARRAY<3> GetInputLayout()
-    {
-        static const D3D11_INPUT_ELEMENT_DESC inputLayout[3] = {
-            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 2, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-        };
-        return inputLayout;
-    }
+    static const D3D11_INPUT_ELEMENT_DESC inputLayout[3];
 };
 
 
@@ -161,16 +119,7 @@ struct VertexPosNormalTex
     DirectX::XMFLOAT3 pos;
     DirectX::XMFLOAT3 normal;
     DirectX::XMFLOAT2 tex;
-
-    static D3D11_INPUT_ELEMENT_DESC_ARRAY<3> GetInputLayout()
-    {
-        static const D3D11_INPUT_ELEMENT_DESC inputLayout[3] = {
-            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 2, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-        };
-        return inputLayout;
-    }
+    static const D3D11_INPUT_ELEMENT_DESC inputLayout[3];
 };
 
 struct VertexPosNormalTangentTex
@@ -191,17 +140,7 @@ struct VertexPosNormalTangentTex
     DirectX::XMFLOAT3 normal;
     DirectX::XMFLOAT4 tangent;
     DirectX::XMFLOAT2 tex;
-
-    static D3D11_INPUT_ELEMENT_DESC_ARRAY<4> GetInputLayout()
-    {
-        static const D3D11_INPUT_ELEMENT_DESC inputLayout[4] = {
-            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 1, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "TANGENT", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 2, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-            { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 3, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-        };
-        return inputLayout;
-    }
+    static const D3D11_INPUT_ELEMENT_DESC inputLayout[4];
 };
 
-#endif
+#endif 

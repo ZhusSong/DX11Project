@@ -1,164 +1,75 @@
-#include "DX11Utility.h"
 #include "GameObject.h"
-#include "DX11Debug.h"
-#include "ModelManager.h"
-
+#include "DX11Utility.h"
 using namespace DirectX;
-
-struct InstancedData
+GameObject::GameObject() :
+	m_IndexCount(),
+	m_Material(),
+	m_VertexStride()
 {
-    XMMATRIX world;
-    XMMATRIX worldInvTranspose;
-};
+}
 
 Transform& GameObject::GetTransform()
 {
-    return m_Transform;
+	return m_Transform;
 }
+
 
 const Transform& GameObject::GetTransform() const
 {
-    return m_Transform;
+	return m_Transform;
 }
 
-void GameObject::FrustumCulling(const BoundingFrustum& frustumInWorld)
+void GameObject::SetTexture(ID3D11ShaderResourceView* texture)
 {
-    size_t sz = m_pModel->meshdatas.size();
-    m_InFrustum = false;
-    m_SubModelInFrustum.resize(sz);
-    for (size_t i = 0; i < sz; ++i)
-    {
-        BoundingOrientedBox box;
-        BoundingOrientedBox::CreateFromBoundingBox(box, m_pModel->meshdatas[i].m_BoundingBox);
-        box.Transform(box, m_Transform.GetLocalToWorldMatrixXM());
-        m_SubModelInFrustum[i] = frustumInWorld.Intersects(box);
-        m_InFrustum = m_InFrustum || m_SubModelInFrustum[i];
-    }
+	m_Texture = texture;
 }
 
-void GameObject::CubeCulling(const DirectX::BoundingOrientedBox& obbInWorld)
+void GameObject::SetMaterial(const Material& material)
 {
-    size_t sz = m_pModel->meshdatas.size();
-    m_InFrustum = false;
-    m_SubModelInFrustum.resize(sz);
-    for (size_t i = 0; i < sz; ++i)
-    {
-        BoundingOrientedBox box;
-        BoundingOrientedBox::CreateFromBoundingBox(box, m_pModel->meshdatas[i].m_BoundingBox);
-        box.Transform(box, m_Transform.GetLocalToWorldMatrixXM());
-        m_SubModelInFrustum[i] = obbInWorld.Intersects(box);
-        m_InFrustum = m_InFrustum || m_SubModelInFrustum[i];
-    }
+	m_Material = material;
 }
 
-void GameObject::CubeCulling(const DirectX::BoundingBox& aabbInWorld)
+
+
+
+void GameObject::Draw(ID3D11DeviceContext* deviceContext,BasicEffect& effect)
 {
-    size_t sz = m_pModel->meshdatas.size();
-    m_InFrustum = false;
-    m_SubModelInFrustum.resize(sz);
-    for (size_t i = 0; i < sz; ++i)
-    {
-        BoundingBox box;
-        m_pModel->meshdatas[i].m_BoundingBox.Transform(box, m_Transform.GetLocalToWorldMatrixXM());
-        m_SubModelInFrustum[i] = aabbInWorld.Intersects(box);
-        m_InFrustum = m_InFrustum || m_SubModelInFrustum[i];
-    }
+	//设置顶点/索引缓冲区
+	UINT strides = m_VertexStride;
+	UINT offsets = 0;
+	deviceContext->IASetVertexBuffers(0, 1, m_VertexBuffer.GetAddressOf(), &strides, &offsets);
+	deviceContext->IASetIndexBuffer(m_IndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+
+	effect.SetWorldMatrix(m_Transform.GetLocalToWorldMatrixXM());
+	effect.SetTexture(m_Texture.Get());
+	effect.SetMaterial(m_Material);
+	effect.Apply(deviceContext);
+
+	////获取之前已经绑定到渲染管线上的常量缓冲区并进行修改
+	//ComPtr<ID3D11Buffer> cBuffer = nullptr;
+	//deviceContext->VSGetConstantBuffers(0, 1, cBuffer.GetAddressOf());
+	//CBChangesEveryDrawing cbDrawing;
+	////内部转置
+	//XMMATRIX w = m_Transform.GetLocalToWorldMatrixXM();
+	//cbDrawing.world = XMMatrixTranspose(w);
+	//cbDrawing.worldInvTranspose = XMMatrixTranspose(InverseTranspose(w));
+	//cbDrawing.material = m_Material;
+	////更新常量缓冲区
+	//D3D11_MAPPED_SUBRESOURCE mappedData;
+	//HR(deviceContext->Map(cBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
+	//memcpy_s(mappedData.pData, sizeof(CBChangesEveryDrawing), &cbDrawing, sizeof(CBChangesEveryDrawing));
+	//deviceContext->Unmap(cBuffer.Get(), 0);
+	////设置纹理
+	//deviceContext->PSSetShaderResources(0, 1, m_Texture.GetAddressOf());
+	//开始绘制
+	deviceContext->DrawIndexed(m_IndexCount, 0, 0);
 }
-
-void GameObject::SetModel(const Model* pModel)
+void GameObject::SetDebugObjectName(const std::string& name)
 {
-    m_pModel = pModel;
-}
-
-const Model* GameObject::GetModel() const
-{
-    return m_pModel;
-}
-
-BoundingBox GameObject::GetLocalBoundingBox() const
-{
-    return m_pModel ? m_pModel->boundingbox : DirectX::BoundingBox(DirectX::XMFLOAT3(), DirectX::XMFLOAT3());
-}
-
-BoundingBox GameObject::GetLocalBoundingBox(size_t idx) const
-{
-    if (!m_pModel || m_pModel->meshdatas.size() >= idx)
-        return DirectX::BoundingBox(DirectX::XMFLOAT3(), DirectX::XMFLOAT3());
-    return m_pModel->meshdatas[idx].m_BoundingBox;
-}
-
-BoundingBox GameObject::GetBoundingBox() const
-{
-    if (!m_pModel)
-        return DirectX::BoundingBox(DirectX::XMFLOAT3(), DirectX::XMFLOAT3());
-    BoundingBox box = m_pModel->boundingbox;
-    box.Transform(box, m_Transform.GetLocalToWorldMatrixXM());
-    return box;
-}
-
-BoundingBox GameObject::GetBoundingBox(size_t idx) const
-{
-    if (!m_pModel || m_pModel->meshdatas.size() >= idx)
-        return DirectX::BoundingBox(DirectX::XMFLOAT3(), DirectX::XMFLOAT3());
-    BoundingBox box = m_pModel->meshdatas[idx].m_BoundingBox;
-    box.Transform(box, m_Transform.GetLocalToWorldMatrixXM());
-    return box;
-}
-
-BoundingOrientedBox GameObject::GetBoundingOrientedBox() const
-{
-    if (!m_pModel)
-        return DirectX::BoundingOrientedBox(DirectX::XMFLOAT3(), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-    BoundingOrientedBox obb;
-    BoundingOrientedBox::CreateFromBoundingBox(obb, m_pModel->boundingbox);
-    obb.Transform(obb, m_Transform.GetLocalToWorldMatrixXM());
-    return obb;
-}
-BoundingOrientedBox GameObject::GetBoundingOrientedBox(size_t idx) const
-{
-    if (!m_pModel || m_pModel->meshdatas.size() >= idx)
-        return DirectX::BoundingOrientedBox(DirectX::XMFLOAT3(), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f));
-    BoundingOrientedBox obb;
-    BoundingOrientedBox::CreateFromBoundingBox(obb, m_pModel->meshdatas[idx].m_BoundingBox);
-    obb.Transform(obb, m_Transform.GetLocalToWorldMatrixXM());
-    return obb;
-}
-
-void GameObject::Draw(ID3D11DeviceContext* deviceContext, IEffect& effect)
-{
-    if (!m_InFrustum || !deviceContext)
-        return;
-    size_t sz = m_pModel->meshdatas.size();
-    size_t fsz = m_SubModelInFrustum.size();
-    for (size_t i = 0; i < sz; ++i)
-    {
-        if (i < fsz && !m_SubModelInFrustum[i])
-            continue;
-
-        IEffectMeshData* pEffectMeshData = dynamic_cast<IEffectMeshData*>(&effect);
-        if (!pEffectMeshData)
-            continue;
-
-        IEffectMaterial* pEffectMaterial = dynamic_cast<IEffectMaterial*>(&effect);
-        if (pEffectMaterial)
-            pEffectMaterial->SetMaterial(m_pModel->materials[m_pModel->meshdatas[i].m_MaterialIndex]);
-
-        IEffectTransform* pEffectTransform = dynamic_cast<IEffectTransform*>(&effect);
-        if (pEffectTransform)
-            pEffectTransform->SetWorldMatrix(m_Transform.GetLocalToWorldMatrixXM());
-
-        effect.Apply(deviceContext);
-
-        MeshDataInput input = pEffectMeshData->GetInputData(m_pModel->meshdatas[i]);
-        {
-            deviceContext->IASetInputLayout(input.pInputLayout);
-            deviceContext->IASetPrimitiveTopology(input.topology);
-            deviceContext->IASetVertexBuffers(0, (uint32_t)input.pVertexBuffers.size(),
-                input.pVertexBuffers.data(), input.strides.data(), input.offsets.data());
-            deviceContext->IASetIndexBuffer(input.pIndexBuffer, input.indexCount > 65535 ? DXGI_FORMAT_R32_UINT : DXGI_FORMAT_R16_UINT, 0);
-
-            deviceContext->DrawIndexed(input.indexCount, 0, 0);
-        }
-
-    }
+#if (defined(DEBUG) || defined(_DEBUG)) && (GRAPHICS_DEBUGGER_OBJECT_NAME)
+	D3D11SetDebugObjectName(m_VertexBuffer.Get(), name + ".VertexBuffer");
+	D3D11SetDebugObjectName(m_IndexBuffer.Get(), name + ".IndexBuffer");
+#else
+	UNREFERENCED_PARAMETER(name);
+#endif
 }

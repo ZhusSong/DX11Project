@@ -1,0 +1,15 @@
+H:\DX11Project\assimp\contrib\zlib\adler32.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\adler32.obj
+H:\DX11Project\assimp\contrib\zlib\compress.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\compress.obj
+H:\DX11Project\assimp\contrib\zlib\crc32.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\crc32.obj
+H:\DX11Project\assimp\contrib\zlib\deflate.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\deflate.obj
+H:\DX11Project\assimp\contrib\zlib\gzclose.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\gzclose.obj
+H:\DX11Project\assimp\contrib\zlib\gzlib.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\gzlib.obj
+H:\DX11Project\assimp\contrib\zlib\gzread.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\gzread.obj
+H:\DX11Project\assimp\contrib\zlib\gzwrite.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\gzwrite.obj
+H:\DX11Project\assimp\contrib\zlib\inflate.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\inflate.obj
+H:\DX11Project\assimp\contrib\zlib\infback.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\infback.obj
+H:\DX11Project\assimp\contrib\zlib\inftrees.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\inftrees.obj
+H:\DX11Project\assimp\contrib\zlib\inffast.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\inffast.obj
+H:\DX11Project\assimp\contrib\zlib\trees.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\trees.obj
+H:\DX11Project\assimp\contrib\zlib\uncompr.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\uncompr.obj
+H:\DX11Project\assimp\contrib\zlib\zutil.c;H:\DX11Project\assimp\contrib\zlib\zlibstatic.dir\Debug\zutil.obj
