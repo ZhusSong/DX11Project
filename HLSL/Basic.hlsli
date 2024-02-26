@@ -29,6 +29,9 @@ cbuffer CBChangesRarely : register(b4)
     matrix g_Reflection;
     matrix g_Shadow;
     matrix m_RefShadow;
+<<<<<<< HEAD
+>>>>>>> parent of 8da2e06 (24.2.21)
+=======
 >>>>>>> parent of 8da2e06 (24.2.21)
     DirectionalLight g_DirLight[5];
     PointLight g_PointLight[5];

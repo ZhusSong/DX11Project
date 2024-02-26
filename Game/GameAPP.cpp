@@ -224,6 +224,7 @@ void GameApp::DrawScene()
 bool GameApp::InitResource()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     // ******************
     // 初始化游戏对象
     //
@@ -233,6 +234,8 @@ bool GameApp::InitResource()
     m_Ground.SetModel(pModel);
     pModel->SetDebugObjectName("ground_19");
 =======
+=======
+>>>>>>> parent of 8da2e06 (24.2.21)
 	
 
 	//初始化游戏对象
