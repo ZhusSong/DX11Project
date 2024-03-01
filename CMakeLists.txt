@@ -19,7 +19,7 @@ set(USE_IMGUI ON)
 
 # 使用Assimp时设置为ON
 # 需要将解压的assimp文件夹内CMakeList.txt所在的全部文件复制到当前项目的Assimp文件夹内
-set(USE_ASSIMP OFF)
+set(USE_ASSIMP ON)
 
 # 设置C++标准为C++17
 set(CMAKE_CXX_STANDARD 17)
@@ -144,7 +144,11 @@ DX11API/TextureLoader/DDSTextureLoader.h
 DX11API/TextureLoader/WICTextureLoader.cpp
 DX11API/TextureLoader/WICTextureLoader.h
  )
- 
+ #模型读取
+ set (ModelManager
+ DX11API/ModelManager.cpp
+DX11API/ModelManager.h
+ )
  set (InputAPI
 DX11API/KeyBoard.cpp
 DX11API/KeyBoard.h
@@ -167,10 +171,11 @@ DX11API/DX11Utility.h
  source_group(DX11API\\GameObjects FILES ${GameObjects})
  source_group(DX11API\\Transform FILES ${Transform})
  source_group(DX11API\\RenderAndEffects FILES ${RenderAndEffects})
+ source_group(DX11API\\ModelManager FILES ${ModelManager})
 
 
 add_executable(${TARGET_NAME} ${SOURCES}  ${Camera}
-${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} ${RenderAndEffects}
+${DX11API} ${TextureLoader} ${InputAPI}  ${UtilityAPI} ${GameObjects} ${Transform} ${RenderAndEffects} ${ModelManager}
 ${HLSL_Files})
 # 添加链接库
 target_link_libraries(${TARGET_NAME}  d3d11.lib dxgi.lib dxguid.lib D3DCompiler.lib winmm.lib d2d1.lib dwrite.lib winmm.lib legacy_stdio_definitions.lib)
