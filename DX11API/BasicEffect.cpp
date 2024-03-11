@@ -119,7 +119,7 @@ BasicEffect & BasicEffect::operator=(BasicEffect&& moveFrom)noexcept
     return *this;
 }
 
-BasicEffect& BasicEffect::Get()
+BasicEffect & BasicEffect::Get()
 {
     if(!g_Instance)
         throw std::exception("BasicEffect is a singleton!");
