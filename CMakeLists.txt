@@ -102,6 +102,8 @@ Game/GameApp.cpp
 Game/GameApp.h
 Game/GameObject.cpp
 Game/GameObject.h
+Game/HALTest_001.h
+Game/HALTest_001.cpp
  )
 set (Camera
 Game/Camera.h
