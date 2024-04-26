@@ -1,2 +1,3 @@
-#pragma once
-#include "assimp/config.h"
+﻿#pragma once
+
+

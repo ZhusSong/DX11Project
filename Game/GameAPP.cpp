@@ -394,6 +394,7 @@ void GameApp::DrawScene()
 	// ******************
 	// 1. 给镜面反射区域写入值1到模板缓冲区
 	// 
+
 	
 	// 裁剪掉背面三角形
 	// 标记镜面区域的模板值为1
@@ -519,7 +520,7 @@ bool GameApp::InitResource()
 	m_WoodBoxMat = material;
 	m_ShadowMat.ambient = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 	m_ShadowMat.diffuse = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.5f);
-	m_ShadowMat.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 16.0f);
+	m_ShadowMat.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 5.0f);
 
 	//初始化木箱
 	//HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr, texture.GetAddressOf()));
