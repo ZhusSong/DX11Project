@@ -102,8 +102,6 @@ Game/GameApp.cpp
 Game/GameApp.h
 Game/GameObject.cpp
 Game/GameObject.h
-Game/HALTest_001.h
-Game/HALTest_001.cpp
  )
 set (Camera
 Game/Camera.h
@@ -150,6 +148,7 @@ DX11API/TextureLoader/WICTextureLoader.h
  set (ModelManager
  DX11API/ModelManager.cpp
 DX11API/ModelManager.h
+DX11API/MeshData.h
  )
  set (InputAPI
 DX11API/KeyBoard.cpp
