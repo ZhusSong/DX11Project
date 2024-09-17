@@ -219,7 +219,27 @@ void BasicEffect::SetRenderAlphaBlend(ID3D11DeviceContext* deviceContext)
     deviceContext->OMSetDepthStencilState(nullptr, 0);
     deviceContext->OMSetBlendState(RenderStates::BSTransparent.Get(), nullptr, 0xFFFFFFFF);
 }
+void BasicEffect::SetDrawBoltAnimNoDepthTest(ID3D11DeviceContext* deviceContext)
+{
+    deviceContext->IASetInputLayout(pImpl->m_VertexLayout3D.Get());
+    deviceContext->VSSetShader(pImpl->m_VertexShader3D.Get(), nullptr, 0);
+    deviceContext->RSSetState(RenderStates::RSNoCull.Get());
+    deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(), nullptr, 0);
+    deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
+    deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDepthTest.Get(), 0);
+    deviceContext->OMSetBlendState(RenderStates::BSAdditive.Get(), nullptr, 0xFFFFFFFF);
+}
 
+void BasicEffect::SetDrawBoltAnimNoDepthWrite(ID3D11DeviceContext* deviceContext)
+{
+    deviceContext->IASetInputLayout(pImpl->m_VertexLayout3D.Get());
+    deviceContext->VSSetShader(pImpl->m_VertexShader3D.Get(), nullptr, 0);
+    deviceContext->RSSetState(RenderStates::RSNoCull.Get());
+    deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(), nullptr, 0);
+    deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
+    deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDepthWrite.Get(), 0);
+    deviceContext->OMSetBlendState(RenderStates::BSAdditive.Get(), nullptr, 0xFFFFFFFF);
+}
 void BasicEffect::SetRenderNoDoubleBlend(ID3D11DeviceContext* deviceContext, UINT stencilRef)
 {
     deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -267,7 +287,27 @@ void BasicEffect::SetRenderAlphaBlendWithStencil(ID3D11DeviceContext* deviceCont
     deviceContext->OMSetDepthStencilState(RenderStates::DSSDrawWithStencil.Get(), stencilRef);
     deviceContext->OMSetBlendState(RenderStates::BSTransparent.Get(), nullptr, 0xFFFFFFFF);
 }
+void BasicEffect::SetDrawBoltAnimNoDepthTestWithStencil(ID3D11DeviceContext* deviceContext, UINT stencilRef)
+{
+    deviceContext->IASetInputLayout(pImpl->m_VertexLayout3D.Get());
+    deviceContext->VSSetShader(pImpl->m_VertexShader3D.Get(), nullptr, 0);
+    deviceContext->RSSetState(RenderStates::RSNoCull.Get());
+    deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(), nullptr, 0);
+    deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
+    deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDepthTestWithStencil.Get(), stencilRef);
+    deviceContext->OMSetBlendState(RenderStates::BSAdditive.Get(), nullptr, 0xFFFFFFFF);
+}
 
+void BasicEffect::SetDrawBoltAnimNoDepthWriteWithStencil(ID3D11DeviceContext* deviceContext, UINT stencilRef)
+{
+    deviceContext->IASetInputLayout(pImpl->m_VertexLayout3D.Get());
+    deviceContext->VSSetShader(pImpl->m_VertexShader3D.Get(), nullptr, 0);
+    deviceContext->RSSetState(RenderStates::RSNoCull.Get());
+    deviceContext->PSSetShader(pImpl->m_PixelShader3D.Get(), nullptr, 0);
+    deviceContext->PSSetSamplers(0, 1, RenderStates::SSLinearWrap.GetAddressOf());
+    deviceContext->OMSetDepthStencilState(RenderStates::DSSNoDepthWriteWithStencil.Get(), stencilRef);
+    deviceContext->OMSetBlendState(RenderStates::BSAdditive.Get(), nullptr, 0xFFFFFFFF);
+}
 void BasicEffect::Set2DRenderDefault(ID3D11DeviceContext* deviceContext)
 {
     deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -279,6 +319,7 @@ void BasicEffect::Set2DRenderDefault(ID3D11DeviceContext* deviceContext)
     deviceContext->OMSetDepthStencilState(nullptr, 0);
     deviceContext->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
 }
+
 
 void BasicEffect::Set2DRenderAlphaBlend(ID3D11DeviceContext* deviceContext)
 {

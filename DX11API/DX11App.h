@@ -7,6 +7,7 @@
 #include <d2d1.h>
 #include <dwrite.h>
 #include <d3d11_1.h>
+#include <d3d12.h>
 #include "WinAPISetting.h"
 #include <DirectXMath.h>
 #include "DXGameTimer.h"
@@ -95,14 +96,14 @@ protected:
     ComPtr<ID2D1RenderTarget> m_D2dRenderTarget;
     // DWrite工厂
     ComPtr<IDWriteFactory> m_DwriteFactory;
-    // Direct3D 11
-    //D3D11设备
+    // Direct3D 12
+    //D3D12设备
     ComPtr<ID3D11Device> m_D3dDevice;
-    //D3D11设备上下文
+    //D3D12设备上下文
     ComPtr<ID3D11DeviceContext> m_D3dImmediateContext;
-    //D3D11交换链
+    //D3D12交换链
     ComPtr<IDXGISwapChain> m_SwapChain;
-    // Direct3D 11.1
+    // Direct3D 12.1
     ComPtr<ID3D11Device1> m_D3dDevice1;
     ComPtr<ID3D11DeviceContext1> m_D3dImmediateContext1;
     ComPtr<IDXGISwapChain1> m_SwapChain1;

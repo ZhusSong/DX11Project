@@ -63,7 +63,15 @@ void GameApp::UpdateScene(float dt)
 	//m_MouseTracker.Update(state_mouse);
 //	static float phi = 0.0f, theta = 0.0f;
 
+	/*camera_3rd->RotateY(0.1f * 0.01f);*/
 	ImGuiIO& io = ImGui::GetIO();
+	if (ImGui::Begin("CameraText"))
+	{
+		ImGui::Text("W/S/A/D in FPS/Free camera");
+		ImGui::Text("Hold the right mouse button and drag the view");
+		ImGui::Text("The box moves at First and Third Person mode");
+
+
 	if (m_CameraMode == CameraMode::FirstPerson || m_CameraMode == CameraMode::Free)
 	{
 		//前后变量与左右变量
@@ -78,7 +86,6 @@ void GameApp::UpdateScene(float dt)
 		if (ImGui::IsKeyDown(ImGuiKey_D))
 			d2 += dt;
 
-
 		if (m_CameraMode == CameraMode::FirstPerson)
 			camera_1st->Walk(d1 * 6.0f);
 		else
@@ -86,7 +93,6 @@ void GameApp::UpdateScene(float dt)
 			camera_1st->MoveForward(d1 * 6.0f);
 		}
 		camera_1st->Move(d2 * 6.0f);
-
 
 
 		//限制摄像机位置
@@ -117,8 +123,65 @@ void GameApp::UpdateScene(float dt)
 		if (ImGui::IsKeyDown(ImGuiKey_D) && adjustedPos.x <= 8.9f )
 			d2 += dt * 4.0f;
 
-		adjustedPos.x += d2;
-		adjustedPos.z += d1;
+		static int curr_item_3 = 0;
+		static const char* move_mode[] = {
+		"uniformVelocity",
+		"accelerations",
+		"freeFall",
+		"upThrow",
+		"horizontal projection",
+		"diagonally projection"
+		};
+		if(ImGui::Combo("Move Mode", &curr_item_3, move_mode, ARRAYSIZE(move_mode)))
+		{
+			if (curr_item_3 == 0)
+			{
+				totalTime = 0.0f;
+				adjustedPos = XMFLOAT3(0.0f, 0.0f, 0.0f);
+				woodBox.SetPosition(adjustedPos);
+				m_moveStyle = moveStyle::dengSu;
+			}
+			else if (curr_item_3 == 1)
+			{
+				totalTime = 0.0f;
+				adjustedPos = XMFLOAT3(0.0f, 0.0f, 0.0f);
+				woodBox.SetPosition(adjustedPos);
+				m_moveStyle = moveStyle::dengJiaSu;
+			}
+			else if (curr_item_3 == 2)
+			{
+				totalTime = 0.0f;
+				adjustedPos = XMFLOAT3(0.0f, 0.0f, 0.0f);
+				woodBox.SetPosition(adjustedPos);
+				//	adjustedPos.y = 9.0f;
+				//	woodBox.SetPosition(adjustedPos);
+				m_moveStyle = moveStyle::ziYouLuoTi;
+			}
+			else if (curr_item_3 == 3)
+			{
+				totalTime = 0.0f;
+				adjustedPos = XMFLOAT3(0.0f, 0.0f, 0.0f);
+				woodBox.SetPosition(adjustedPos);
+				m_moveStyle = moveStyle::xiangShang;
+			}
+			else if (curr_item_3 == 4)
+			{
+				totalTime = 0.0f;
+				adjustedPos = XMFLOAT3(0.0f, 0.0f, 0.0f);
+				woodBox.SetPosition(adjustedPos);
+				m_moveStyle = moveStyle::shuiPingTouShe;
+
+			}
+			else if (curr_item_3 == 5)
+			{
+				totalTime = 0.0f;
+				adjustedPos = XMFLOAT3(-8.0f, 0.0f, 0.0f);
+				woodBox.SetPosition(adjustedPos);
+				m_moveStyle = moveStyle::xieFangTouShe;
+			}
+		}
+
+		adjustedPos = MoveBox(m_moveStyle, m_WoodBox, dt);
 		woodBox.SetPosition(adjustedPos);
 		camera_3rd->SetTarget(adjustedPos);
 
@@ -135,12 +198,34 @@ void GameApp::UpdateScene(float dt)
 	m_BasicEffect.SetEyePos(m_Camera->GetPosition());
 
 
-	if (ImGui::Begin("CameraText"))
-	{
-		ImGui::Text("W/S/A/D in FPS/Free camera");
-		ImGui::Text("Hold the right mouse button and drag the view");
-		ImGui::Text("The box moves at First and Third Person mode");
+	
 
+		static int curr_item_2 = 1;
+		static const char* modes_geometry[] = {
+		"Cube",
+		"Sphere",
+		"Cylinder",
+		"Cone"
+		};
+		if (ImGui::Combo("Geometry Mode", &curr_item_2, modes_geometry, ARRAYSIZE(modes_geometry)))
+		{
+			if (curr_item_2 == 0)
+			{
+				m_WoodBox.SetBuffer(m_D3dDevice.Get(), BasicObject::CreateBox());
+			}
+			else if (curr_item_2 == 1)
+			{
+				m_WoodBox.SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSphere());
+			}
+			else if (curr_item_2 == 2)
+			{
+				m_WoodBox.SetBuffer(m_D3dDevice.Get(), BasicObject::CreateCylinder());
+			}
+			else if (curr_item_2 == 3)
+			{
+				m_WoodBox.SetBuffer(m_D3dDevice.Get(), BasicObject::CreateCone());
+			}
+		}
 		static int curr_item = 1;
 		static const char* modes[] = {
 		"First Person",
@@ -200,15 +285,81 @@ void GameApp::UpdateScene(float dt)
 		auto cameraPos = m_Camera->GetPosition();
 		ImGui::Text("Camera Position\n: %.2f %.2f %.2f", cameraPos.x, cameraPos.y, cameraPos.z);
 
+		rot_box += dt;
+		m_WoodBox_2.GetTransform().SetRotation(0.0f , rot_box, rot_box/2);
+	
+
+		ImGui::Text("material.specular\n: %.2f %.2f %.2f %.2f", pointLight.specular.x, pointLight.specular.y, pointLight.specular.z, pointLight.specular.w);
+		if (ImGui::IsKeyDown(ImGuiKey_K))
+		{
+			pointLight.specular.x +=0.5f;
+			pointLight.specular.y += 0.5f;
+			pointLight.specular.z += 0.5f;
+			pointLight.specular.w += 0.5f;
+		}
+
+		if (ImGui::IsKeyDown(ImGuiKey_L))
+		{
+			if (pointLight.specular.x >= 0.0f&& pointLight.specular.y >= 0.0f&&pointLight.specular.z >= 0.0f && pointLight.specular.w >= 0.0f)
+			{
+			pointLight.specular.x -= 0.5f;
+			pointLight.specular.y -= 0.5f;
+			pointLight.specular.z -= 0.5f;
+			pointLight.specular.w -= 0.5f;
+			}
+
+		}
+		if (ImGui::IsKeyDown(ImGuiKey_R))
+		{
+			r += 0.01f;
+			m_FireAnim.GetTransform().SetRotation(r,0.0f,0.0f);
+		}
+		if (ImGui::IsKeyDown(ImGuiKey_T))
+		{
+			r -= 0.01f;
+			m_FireAnim.GetTransform().SetRotation(r, 0.0f, 0.0f);
+		}
+		ImGui::Text("Fire Rotation\n: %.2f %.2f %.2f", m_FireAnim.GetTransform().GetRotation().x, 0.0f, 0.0f);
+		if (ImGui::IsKeyDown(ImGuiKey_M))
+		{
+			pointLight.position.y -= 0.5f;
+		}
+
+		if (ImGui::IsKeyDown(ImGuiKey_N))
+		{
+			pointLight.position.y += 0.5f;
+		}
+		m_BasicEffect.SetPointLight(0, pointLight);
+
+
+	
+
+
+		ImGui::PushID(3);
+
+		ImGui::PopID();
+
 		ImGui::End();
 		ImGui::Render();
+
+		m_BasicEffect.SetViewMatrix(m_Camera->GetViewXM());
+
+		static int currBoltFrame = 0;
+		static float frameTime = 0.0f;
+		m_FireAnim.SetTexture(m_pFireAnims[currBoltFrame].Get());
+		if (frameTime > 1.0f / 60)
+		{
+			currBoltFrame = (currBoltFrame + 1) % 60;
+			if(currBoltFrame>=11)
+				currBoltFrame=0;
+			frameTime -= 1.0f / 60;
+		}
+		frameTime += dt/10;
 
 
 	}
 
-	//XMMATRIX W = XMMatrixRotationX(phi) * XMMatrixRotationY(theta);
-	//m_VSConstantBuffer.world = XMMatrixTranspose(W);
-	//m_VSConstantBuffer.worldInvTranspose = XMMatrixTranspose(InverseTranspose(W));
+			
 
 	//if (ImGui::Begin("Texture Mapping"))
 	//{
@@ -267,12 +418,6 @@ void GameApp::UpdateScene(float dt)
 	//		}
 	//	}
 
-	//	ImGui::Text("Material");
-	//	ImGui::PushID(3);
-	//	ImGui::ColorEdit3("Ambient", &m_PSConstantBuffer.material.ambient.x);
-	//	ImGui::ColorEdit3("Diffuse", &m_PSConstantBuffer.material.diffuse.x);
-	//	ImGui::ColorEdit3("Specular", &m_PSConstantBuffer.material.specular.x);
-	//	ImGui::PopID();
 
 	//	static int curr_light_item = 1;
 	//	static const char* light_modes[] = {
@@ -395,7 +540,6 @@ void GameApp::DrawScene()
 	// 1. 给镜面反射区域写入值1到模板缓冲区
 	// 
 
-	
 	// 裁剪掉背面三角形
 	// 标记镜面区域的模板值为1
 	// 不写入像素颜色
@@ -420,6 +564,7 @@ void GameApp::DrawScene()
 	m_Walls[4].Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 	m_Floor.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 	m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_WoodBox_2.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 	//m_CBStates.isReflection = true;
 	//D3D11_MAPPED_SUBRESOURCE mappedData;
 	//HR(m_D3dImmediateContext->Map(m_ConstantBuffers[1].Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData));
@@ -429,21 +574,31 @@ void GameApp::DrawScene()
 	// 3. 绘制不透明反射物体的阴影
 	//
 	m_WoodBox.SetMaterial(m_ShadowMat);
+	m_WoodBox_2.SetMaterial(m_ShadowMat);
 	// 反射开启，阴影开启	
 	m_BasicEffect.SetShadowState(true);
 	m_BasicEffect.SetRenderNoDoubleBlend(m_D3dImmediateContext.Get(), 1);
 
 	m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_WoodBox_2.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 
 	// 恢复到原来的状态
 	m_BasicEffect.SetShadowState(false);
 	m_WoodBox.SetMaterial(m_WoodBoxMat);
-
+	m_WoodBox_2.SetMaterial(m_WoodBoxMat);
+	
 	////4.绘制透明反射物体
 	//m_BasicEffect.SetRenderDefaultWithStencil(m_D3dImmediateContext.Get(), 1);
 	//m_Water.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 
+//	m_FireAnim.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 	//关闭反射绘制
+	m_BasicEffect.SetDrawBoltAnimNoDepthWriteWithStencil(m_D3dImmediateContext.Get(), 1);
+	m_FireAnim.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+
+	m_BasicEffect.SetReflectionState(false);		// 反射关闭
+
+
 	m_BasicEffect.SetReflectionState(false);
 	m_BasicEffect.SetRenderAlphaBlendWithStencil(m_D3dImmediateContext.Get(), 1);
 
@@ -461,24 +616,35 @@ void GameApp::DrawScene()
 	for (auto& wall : m_Walls)
 		wall.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 	m_Floor.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_FireAnim.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 
 
 	//5.绘制透明的正常物体
 	// 
 	//笼子
+
+
 	m_BasicEffect.SetRenderAlphaBlend(m_D3dImmediateContext.Get());
 	m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_WoodBox_2.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 
 	// 6. 绘制不透明正常物体的阴影
 	//
 	m_WoodBox.SetMaterial(m_ShadowMat);
+	m_WoodBox_2.SetMaterial(m_ShadowMat);
 	m_BasicEffect.SetShadowState(true);	// 反射关闭，阴影开启
 	m_BasicEffect.SetRenderNoDoubleBlend(m_D3dImmediateContext.Get(), 0);
 
 	m_WoodBox.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
+	m_WoodBox_2.Draw(m_D3dImmediateContext.Get(), m_BasicEffect);
 
 	m_BasicEffect.SetShadowState(false);		// 阴影关闭
 	m_WoodBox.SetMaterial(m_WoodBoxMat);
+	m_WoodBox_2.SetMaterial(m_WoodBoxMat);
+
+	//绘制2D物体
+	//m_BasicEffect.SetDrawBoltAnimNoDepthWrite(m_D3dImmediateContext.Get());
+
 
 
 	//m_BasicEffect.SetRenderAlphaBlend(m_D3dImmediateContext.Get());
@@ -513,23 +679,73 @@ bool GameApp::InitResource()
 	ComPtr<ID3D11ShaderResourceView> texture;
 	//设置材质
 	Material material{};
-	material.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	material.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	material.specular = XMFLOAT4(0.2f, 0.2f, 0.2f, 16.0f);
+	material.ambient = XMFLOAT4(0.4f, 0.4f, 0.4f, 1.0f);
+	material.diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
+	material.specular = XMFLOAT4(0.1f, 0.1f, 0.1f, 16.0f);
+
+	Material material_2D{};
+	material_2D.ambient = XMFLOAT4(1.0f, 1.0f, 1.0f, 0.5f);
+	material_2D.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	material_2D.specular = XMFLOAT4(0.1f, 0.1f, 0.1f, 1.0f);
 
 	m_WoodBoxMat = material;
 	m_ShadowMat.ambient = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 	m_ShadowMat.diffuse = XMFLOAT4(0.0f, 0.0f, 0.0f, 0.5f);
 	m_ShadowMat.specular = XMFLOAT4(0.0f, 0.0f, 0.0f, 5.0f);
 
+	////初始化火焰
+	//m_pFireAnims.assign(120, nullptr);
+	//WCHAR strFile[40];
+	//m_pFireAnims.resize(120);
+	//for (int i = 1; i <= 120; ++i)
+	//{
+	//	wsprintf(strFile, L"asset\\FireAnim\\Fire%03d.bmp", i);
+	//	HR(CreateWICTextureFromFile(m_D3dDevice.Get(), strFile, nullptr, m_pFireAnims[i - 1].GetAddressOf()));
+	//}
+	//m_FireAnim.SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSprite(3.0f, 3.0f));
+	//// 抬起高度避免深度缓冲区资源争夺
+	//m_FireAnim.GetTransform().SetPosition(0.0f, 2.01f, 2.0f);
+	//m_FireAnim.GetTransform().SetRotation(-7.8f, 0.0f, 0.0f);
+	//m_FireAnim.SetMaterial(material);
+
+	//初始化火焰
+	m_pFireAnims.assign(12, nullptr);
+	WCHAR strFile[40];
+	m_pFireAnims.resize(12);
+	for (int i = 1; i <=12; ++i)
+	{
+		wsprintf(strFile, L"asset\\dora01\\image%03d.png", i);
+		HR(CreateWICTextureFromFile(m_D3dDevice.Get(), strFile, nullptr, m_pFireAnims[i - 1].GetAddressOf()));
+	}
+	m_FireAnim.SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSprite(3.0f, 3.0f));
+	// 抬起高度避免深度缓冲区资源争夺
+	m_FireAnim.GetTransform().SetPosition(-2.0f, 2.01f, 2.0f);
+	m_FireAnim.GetTransform().SetRotation(-7.8f, 0.0f, 0.0f);
+	m_FireAnim.SetMaterial(material_2D);
+	//material_box.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	//material_box.diffuse = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	//material_box.specular = XMFLOAT4(10.0f, 10.0f,10.0f, 5.0f);
+
+
 	//初始化木箱
 	//HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr, texture.GetAddressOf()));
-	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WireFence.dds", nullptr, texture.GetAddressOf()));
-	m_WoodBox.SetBuffer(m_D3dDevice.Get(),BasicObject::CreateBox());
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\ice.dds", nullptr, texture.GetAddressOf()));
+	m_WoodBox.SetBuffer(m_D3dDevice.Get(),BasicObject::CreateSphere());
 	//稍微抬高避免深度冲突
-	m_WoodBox.GetTransform().SetPosition(0.0f, 0.01f, 5.0f);
+	m_WoodBox.GetTransform().SetPosition(0.0f, 0.00f, 0.0f);
 	m_WoodBox.SetTexture(texture.Get());
 	m_WoodBox.SetMaterial(material);
+
+
+	//初始化木箱
+	//HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr, texture.GetAddressOf()));
+	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\WoodCrate.dds", nullptr, texture.GetAddressOf()));
+	m_WoodBox_2.SetBuffer(m_D3dDevice.Get(), BasicObject::CreateSphere());
+	//稍微抬高避免深度冲突
+	m_WoodBox_2.GetTransform().SetPosition(5.0f, 0.01f, 2.0f);
+	m_WoodBox_2.SetTexture(texture.Get());
+	m_WoodBox_2.SetMaterial(material);
+
 
 	//初始化地板
 	HR(CreateDDSTextureFromFile(m_D3dDevice.Get(), L"asset\\floor.dds", nullptr, texture.ReleaseAndGetAddressOf()));
@@ -622,26 +838,32 @@ bool GameApp::InitResource()
 	m_BasicEffect.SetShadowMatrix(XMMatrixShadow(XMVectorSet(0.0f, 1.0f, 0.0f, 0.99f), XMVectorSet(0.0f, 10.0f, -10.0f, 1.0f)));
 	m_BasicEffect.SetRefShadowMatrix(XMMatrixShadow(XMVectorSet(0.0f, 1.0f, 0.0f, 0.99f), XMVectorSet(0.0f, 10.0f, 30.0f, 1.0f)));
 	//环境光
-	DirectionalLight dirLight;
-	dirLight.ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	dirLight.diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
-	dirLight.specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	dirLight.ambient = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	dirLight.diffuse = XMFLOAT4(0.6f, 0.6f, 0.6f, 1.0f);
+	dirLight.specular = XMFLOAT4(0.4f, 0.4f, 0.4f, 1.0f);
 	dirLight.direction = XMFLOAT3(0.0f, -1.0f, 0.0f);
 	m_BasicEffect.SetDirLight(0, dirLight);
-	/*m_CBRarely.dirLight[0].ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	m_CBRarely.dirLight[0].diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
-	m_CBRarely.dirLight[0].specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
-	m_CBRarely.dirLight[0].direction = XMFLOAT3(0.0f, -1.0f, 0.0f);*/
+	
 
 	// 点光
-	PointLight pointLight;
-	pointLight.position = XMFLOAT3(0.0f, 10.0f, -10.0f);
+	pointLight.position = XMFLOAT3(0.0f,5.0f, 0.0f);
 	pointLight.ambient = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.0f);
-	pointLight.diffuse = XMFLOAT4(0.6f, 0.6f, 0.6f, 1.0f);
+	pointLight.diffuse = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.0f);
 	pointLight.specular = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.0f);
 	pointLight.att = XMFLOAT3(0.0f, 0.1f, 0.0f);
-	pointLight.range = 25.0f;
+	pointLight.range = 30.0f;
 	m_BasicEffect.SetPointLight(0, pointLight);
+
+
+	//pointLight_2.position = XMFLOAT3(3.0f, 4.0f, 0.0f);
+	//pointLight_2.ambient = XMFLOAT4(0.3f, 0.3f, 0.3f, 1.0f);
+	//pointLight_2.diffuse = XMFLOAT4(0.6f, 0.6f, 0.6f, 1.0f);
+	//pointLight_2.specular = XMFLOAT4(2.0f,2.0f, 2.0f, 0.4f);
+	//pointLight_2.att = XMFLOAT3(0.0f, 0.1f, 0.0f);
+	//pointLight_2.range = 1.0f;
+	//m_BasicEffect.SetPointLight(1, pointLight_2);
+
+
 	/*m_CBRarely.pointLight[0].position = XMFLOAT3(0.0f, 10.0f, 0.0f);
 	m_CBRarely.pointLight[0].ambient = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 	m_CBRarely.pointLight[0].diffuse = XMFLOAT4(0.8f, 0.8f, 0.8f, 1.0f);
@@ -665,4 +887,92 @@ bool GameApp::InitResource()
 	m_Mirror.SetDebugObjectName("Mirror");
 
 	return true;
+}
+
+XMFLOAT3 GameApp::MoveBox(moveStyle m_moveStyle, GameObject object,float dt)
+{
+	Transform _object = object.GetTransform();
+	XMFLOAT3 adjustedPos = _object.GetPosition();
+	totalTime += dt;
+	switch (m_moveStyle)
+	{
+	case 0:
+		if (adjustedPos.x <= 8.9f)
+		{
+			adjustedPos.x = totalTime * speed;
+		}
+		else
+		{
+			totalTime = 0.0f;
+			adjustedPos.x = 0.0f;
+		}
+		break;
+	case 1:
+		if (adjustedPos.x <= 8.9f)
+		{
+		//	Vx = Vx + aSpeed * dt;
+			adjustedPos.x = speed * totalTime + 0.5f * aSpeed * totalTime * totalTime;
+		}
+		  else
+		{
+			totalTime = 0.0f;
+			adjustedPos.x = 0.0f;
+		}
+		break;
+	case 2:
+		if (adjustedPos.y >=0.0f)
+		{
+		//	Vy = Vy + g * dt;
+			adjustedPos.y= 12.0f -0.5f*g*totalTime * totalTime;
+		}
+		else
+		{
+			totalTime = 0.0f;
+			adjustedPos.y = 12.0f;
+		}
+		break;
+	case 3:
+		if (adjustedPos.y >= 0.0f)
+		{
+			//Vy = Vup - g * totalTime;
+			adjustedPos.y = Vup * totalTime - 0.5f * g * totalTime * totalTime;
+		}
+		else
+		{
+			totalTime = 0.0f;
+			adjustedPos.y = 0.0f;
+		}
+		break;
+	case 4:
+		if (adjustedPos.y >= 0.0f&&adjustedPos.x<=8.9f)
+		{
+			//Vy = Vup - g * totalTime;
+			adjustedPos.x = Xright * totalTime;
+			adjustedPos.y = 12.0f - 0.5f * g * totalTime * totalTime;
+		}
+		else
+		{
+			totalTime = 0.0f;
+			adjustedPos.y = 0.0f;
+			adjustedPos.x = 0.0f;
+		}
+		break;
+	case 5:
+		if (adjustedPos.y >= 0.0f && adjustedPos.x <= 8.9f)
+		{
+			//Vy = Vup - g * totalTime;
+			adjustedPos.x =-8.0f+Vup*cos(deg) * totalTime;
+			adjustedPos.y = Vup * totalTime*sin(deg)-0.5f*g*totalTime * totalTime;
+		}
+		else
+		{
+			totalTime = 0.0f;
+			adjustedPos.y = 0.0f;
+			adjustedPos.x = -8.0f;
+		}
+		break;
+		
+	}
+
+	return adjustedPos;
 }

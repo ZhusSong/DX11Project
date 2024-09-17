@@ -173,4 +173,15 @@ inline DirectX::XMMATRIX XM_CALLCONV InverseTranspose(DirectX::FXMMATRIX M)
     return XMMatrixTranspose(XMMatrixInverse(nullptr, A));
 }
 
+//
+// 字符串转hash ID
+//
+
+using XID = size_t;
+inline XID StringToID(std::string_view str)
+{
+    static std::hash<std::string_view> hash;
+    return hash(str);
+}
+
 #endif

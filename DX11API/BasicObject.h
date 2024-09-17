@@ -70,6 +70,12 @@ namespace BasicObject
     template<class VertexType = VertexPosNormalTex, class IndexType = DWORD>
     MeshData<VertexType, IndexType> CreateSprite(float width = 10.0f, float depth = 10.0f, float texU = 1.0f, float texV = 1.0f,
         const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
+    // 创建一个指定NDC屏幕区域的面(默认全屏)
+     template<class VertexType = VertexPosTex, class IndexType = DWORD>
+    MeshData<VertexType, IndexType> Create2DShow(const DirectX::XMFLOAT2& center, const DirectX::XMFLOAT2& scale, const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
+    template<class VertexType = VertexPosTex, class IndexType = DWORD>
+    MeshData<VertexType, IndexType> Create2DShow(float centerX = 0.0f, float centerY = 0.0f, float scaleX = 1.0f, float scaleY = 1.0f, const DirectX::XMFLOAT4& color = { 1.0f, 1.0f, 1.0f, 1.0f });
+
 
     // 创建一个地形
     template<class VertexType = VertexPosNormalTex, class IndexType = DWORD>
@@ -540,6 +546,42 @@ namespace BasicObject
             meshData.indexVec[iIndex++] = slices + i % slices;
         }
 
+        return meshData;
+    }
+    template<class VertexType, class IndexType>
+    inline MeshData<VertexType, IndexType> Create2DShow(const DirectX::XMFLOAT2& center, const DirectX::XMFLOAT2& scale, const DirectX::XMFLOAT4& color)
+    {
+        return Create2DShow<VertexType, IndexType>(center.x, center.y, scale.x, scale.y, color);
+    }
+
+    template<class VertexType, class IndexType>
+    inline MeshData<VertexType, IndexType> Create2DShow(float centerX, float centerY, float scaleX, float scaleY, const DirectX::XMFLOAT4& color)
+    {
+        using namespace DirectX;
+
+        MeshData<VertexType, IndexType> meshData;
+        meshData.vertexVec.resize(4);
+
+        Internal::VertexData vertexData;
+        UINT vIndex = 0;
+
+        vertexData = { XMFLOAT3(centerX - scaleX, centerY - scaleY, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),
+            XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f), color, XMFLOAT2(0.0f, 1.0f) };
+        Internal::InsertVertexElement(meshData.vertexVec[vIndex++], vertexData);
+
+        vertexData = { XMFLOAT3(centerX - scaleX, centerY + scaleY, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),
+            XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f), color, XMFLOAT2(0.0f, 0.0f) };
+        Internal::InsertVertexElement(meshData.vertexVec[vIndex++], vertexData);
+
+        vertexData = { XMFLOAT3(centerX + scaleX, centerY + scaleY, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),
+            XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f), color, XMFLOAT2(1.0f, 0.0f) };
+        Internal::InsertVertexElement(meshData.vertexVec[vIndex++], vertexData);
+
+        vertexData = { XMFLOAT3(centerX + scaleX, centerY - scaleY, 0.0f), XMFLOAT3(0.0f, 0.0f, -1.0f),
+            XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f), color, XMFLOAT2(1.0f, 1.0f) };
+        Internal::InsertVertexElement(meshData.vertexVec[vIndex++], vertexData);
+
+        meshData.indexVec = { 0, 1, 2, 2, 3, 0 };
         return meshData;
     }
 

@@ -149,6 +149,7 @@ DX11API/TextureLoader/WICTextureLoader.h
  DX11API/ModelManager.cpp
 DX11API/ModelManager.h
 DX11API/MeshData.h
+DX11API/Material.h
  )
  set (InputAPI
 DX11API/KeyBoard.cpp
@@ -203,4 +204,5 @@ if (${USE_ASSIMP})
     set(ASSIMP_INJECT_DEBUG_POSTFIX OFF)
     add_subdirectory("assimp")
     target_link_libraries(${TARGET_NAME} assimp)
+    set_target_properties(${TARGET_NAME} PROPERTIES VS_DEBUGGER_ENVIRONMENT "PATH=${ASSIMP_LIBRARY_OUTPUT_DIRECTORY}/$<IF:$<CONFIG:Debug>,Debug,Release>")
 endif()
